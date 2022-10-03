@@ -2,8 +2,8 @@ package es.AR.dto
 
 
 data class ResiduosDTO(
-    val año: Short,
-    val mes: String,
+    val year: Short,
+    val month: String,
     val lote: Short,
     val residuos: String,
     val num_distrito: Short,
