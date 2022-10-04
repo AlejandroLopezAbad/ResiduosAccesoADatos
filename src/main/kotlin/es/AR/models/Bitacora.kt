@@ -5,6 +5,7 @@ import nl.adaptivity.xmlutil.serialization.XML
 import java.io.File
 import java.time.LocalDateTime
 import java.util.*
+
 /**
 class Bitacora (
     val opcion_elegida: String,
@@ -27,3 +28,4 @@ class Bitacora (
     }
 }
 */
+

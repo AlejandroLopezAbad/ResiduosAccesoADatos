@@ -4,8 +4,10 @@ import es.AR.dto.ResiduosDTO
 import es.AR.models.Residuos
 import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
+import utils.ParseTipo
 import java.nio.file.Files
 import java.nio.file.Path
+
 
 /**
  * Clase que se encarga del mapeo de los Residuos
@@ -22,7 +24,7 @@ class ResiduosMapper {
         return Residuos(
             year = residuosDTO.year,
             month = residuosDTO.month,
-            lote = stringLoteToTypeLote(residuosDTO.lote),
+            lote = ParseTipo().stringLoteToTypeLote(residuosDTO.lote),
             residuos = TipoResiduo.valueOf(residuosDTO.residuos),
             nombre_distrito = residuosDTO.nombre_distrito,
             toneladas = residuosDTO.toneladas
@@ -121,5 +123,7 @@ class ResiduosMapper {
         }
         return type
     }
+
+
 
 }
