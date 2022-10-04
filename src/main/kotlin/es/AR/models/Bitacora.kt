@@ -1,12 +1,11 @@
-package es.AR
+package es.AR.models
 
 import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XML
 import java.io.File
-import java.time.Instant
 import java.time.LocalDateTime
 import java.util.*
-
+/**
 class Bitacora (
     val opcion_elegida: String,
     val exito: Boolean,
@@ -27,3 +26,4 @@ class Bitacora (
         fichero.writeText(xml.encodeToString(this))
     }
 }
+*/
