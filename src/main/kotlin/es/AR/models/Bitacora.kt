@@ -1,9 +1,8 @@
-package es.AR
+package es.AR.models
 
 import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XML
 import java.io.File
-import java.time.Instant
 import java.time.LocalDateTime
 import java.util.*
 

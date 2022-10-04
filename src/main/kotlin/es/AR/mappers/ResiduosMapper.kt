@@ -2,7 +2,9 @@ package es.AR.mappers
 
 import es.AR.dto.ResiduosDTO
 import es.AR.models.Residuos
+import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
+import utils.ParseTipo
 
 /**
  * Clase que se encarga del mapeo de los Residuos
@@ -19,7 +21,7 @@ class ResiduosMapper {
         return Residuos(
             year = residuosDTO.year,
             month = residuosDTO.month,
-            lote = residuosDTO.lote,
+            lote = ParseTipo().stringLoteToTypeLote(residuosDTO.lote),
             residuos = TipoResiduo.valueOf(residuosDTO.residuos),
             nombre_distrito = residuosDTO.nombre_distrito,
             toneladas = residuosDTO.toneladas
@@ -32,7 +34,7 @@ class ResiduosMapper {
         return ResiduosDTO(
             year = residuos.year,
             month = residuos.month,
-            lote=residuos.lote,
+            lote= residuos.lote.name,
             residuos=residuos.residuos.name,
             nombre_distrito = residuos.nombre_distrito,
             toneladas = residuos.toneladas
@@ -67,5 +69,7 @@ class ResiduosMapper {
         }
         return type
     }
+
+
 
 }
