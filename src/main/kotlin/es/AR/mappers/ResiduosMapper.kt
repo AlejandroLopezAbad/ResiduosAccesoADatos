@@ -4,6 +4,7 @@ import es.AR.dto.ResiduosDTO
 import es.AR.models.Residuos
 import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
+import es.AR.utils.ParseFloat
 import utils.ParseTipo
 import java.nio.file.Files
 import java.nio.file.Path
@@ -82,8 +83,7 @@ class ResiduosMapper {
             lote = stringLoteToTypeLote(campo[2]),
             residuos = stringResiduoToTypeResiduo(campo[3]),
             nombre_distrito = campo[5],
-            toneladas = 0F
-            //TODO //hay que cambiar las comas del csv por
+            toneladas = ParseFloat().stringToFloat(campo[6]),
         )
     }
 
