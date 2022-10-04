@@ -1,4 +1,4 @@
-package es.AR.models
+package es.AR.models.enums
 
 enum class Lote(val num_lote:String) {
     UNO("1"),
