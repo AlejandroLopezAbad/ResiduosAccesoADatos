@@ -5,10 +5,13 @@ import es.AR.models.Residuos
 import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
 import utils.ParseTipo
+import java.nio.file.Files
+import java.nio.file.Path
+
 
 /**
  * Clase que se encarga del mapeo de los Residuos
- * Creacion de CSV , JSON y XML
+ * Creacion de CSV, JSON y XML
  */
 class ResiduosMapper {
 
@@ -29,27 +32,69 @@ class ResiduosMapper {
     }
 
 
-
+    /**
+     * TODO
+     *
+     * @param residuos
+     * @return
+     */
     fun residuosToResiduosDTO(residuos:Residuos):ResiduosDTO{
         return ResiduosDTO(
             year = residuos.year,
             month = residuos.month,
-            lote= residuos.lote.name,
+            lote=residuos.lote.name,
             residuos=residuos.residuos.name,
             nombre_distrito = residuos.nombre_distrito,
             toneladas = residuos.toneladas
         )
     }
 
+    /**
+     * TODO
+     *
+     * @param path
+     * @return
+     */
+    fun csvReaderToResiduo(path:String):List<Residuos>{
+        return Files.lines(Path.of(path))
+            .skip(1)
+            .map { mapToResiduo(it) }.toList()
+    }
+
+    fun residuoDTOToxml(path:String,listResiduosDTO:List<ResiduosDTO>){
+
+
+    }
 
 
 
+    /**
+     * TODO
+     *
+     * @param linea
+     * @return
+     */
+    private fun mapToResiduo(linea:String):Residuos{
+        val campo=linea.split(";")
+        return Residuos(
+            year = campo[0].toShort(),
+            month = campo[1],
+            lote = stringLoteToTypeLote(campo[2]),
+            residuos = stringResiduoToTypeResiduo(campo[3]),
+            nombre_distrito = campo[5],
+            toneladas = 0F
+            //TODO //hay que cambiar las comas del csv por
+        )
+    }
 
 
 
-
-
-
+    /**
+     * TODO
+     *
+     * @param campo
+     * @return
+     */
     private fun stringResiduoToTypeResiduo(campo: String): TipoResiduo {
         var type: TipoResiduo = TipoResiduo.ENVASES
         when (campo) {
@@ -66,6 +111,15 @@ class ResiduosMapper {
             "RCD" -> type = TipoResiduo.RCD
             "CONTENEDORES DE ROPA USADA" -> type = TipoResiduo.CONTENEDORES_ROPA_USADA
             "CAMA DE CABALLO" -> type = TipoResiduo.CAMA_CABALLO
+        }
+        return type
+    }
+    protected fun stringLoteToTypeLote(campo: String): Lote {
+        var type: Lote = Lote.UNO
+        when (campo) {
+            "1" -> type = Lote.UNO
+            "2" -> type = Lote.DOS
+            "3" -> type = Lote.TRES
         }
         return type
     }
