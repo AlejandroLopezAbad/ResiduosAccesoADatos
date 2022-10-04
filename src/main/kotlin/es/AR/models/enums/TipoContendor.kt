@@ -1,4 +1,4 @@
-package es.AR.models
+package es.AR.models.enums
 
 enum class TipoContendor(val tipo:String) {
     ORGANICA("ORGANICA"),

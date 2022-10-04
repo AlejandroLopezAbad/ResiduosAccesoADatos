@@ -14,6 +14,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    // https://mavenlibs.com/maven/dependency/org.jetbrains.kotlin/kdoc
+    implementation ("org.jetbrains.kotlin:kdoc:0.12.1230")
     //implementation("com.fasterxml.jackson.core:jackson-core:2.14.0-rc1")
     //implementation("org.jdom:jdom:2.0.2")
     implementation("org.jetbrains.kotlinx:dataframe:0.8.1")
