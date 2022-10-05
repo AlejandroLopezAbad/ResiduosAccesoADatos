@@ -7,7 +7,7 @@ import es.AR.models.enums.TipoContendor
 import utils.ParseTipo
 
 
-class ContenedoresMapper {
+object ContenedoresMapper {
 
 
     fun dtoToContenedores(contenedorDTO: ContenedoresDTO): Contenedores {
@@ -31,23 +31,19 @@ class ContenedoresMapper {
         )
     }
 
-    /**
-     * TODO
-     *
-     * @param campo
-     * @return
-     */
 
-    private fun stringContenedorToTypeContenedor(campo: String): TipoContendor {
-        var type: TipoContendor = TipoContendor.ENVASES
-        when (campo) {
-            "ORGANICA" -> type = TipoContendor.ORGANICA
-            "RESTO" -> type = TipoContendor.RESTO
-            "ENVASES" -> type = TipoContendor.ENVASES
-            "VIDRIO" -> type = TipoContendor.VIDRIO
-            "PAPEL_CARTON" -> type = TipoContendor.PAPEL_CARTON
-        }
-        return type
+    private fun mapToContenedor(linea:String):Contenedores{
+        val campo=linea.split(";")
+        return Contenedores(
+            codigo_Interno = campo[0],
+            type_Contenedor = ParseTipo().stringContenedorToTypeContenedor(campo[1]),
+            cantidad = campo[4].toInt(),
+            lote = ParseTipo().stringLoteToTypeLote(campo[5]),
+            distrito = campo[6]
+        )
     }
+
+
+
 
 }
