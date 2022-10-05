@@ -4,7 +4,7 @@ import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoContendor
 import org.jetbrains.kotlinx.dataframe.annotations.DataSchema
 
-@DataSchema
+
 data class ContenedoresDTO(
     val codigo_Interno:String,
     val type_Contenedor: String,

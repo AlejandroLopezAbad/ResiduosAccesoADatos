@@ -2,10 +2,9 @@ package es.AR.models
 
 import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
-import org.jetbrains.kotlinx.dataframe.annotations.DataSchema
-import java.time.LocalDate
 
-@DataSchema
+
+
 data class Residuos(
     val year: Short,
     val month: String,

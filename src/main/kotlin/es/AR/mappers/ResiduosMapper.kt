@@ -2,10 +2,12 @@ package es.AR.mappers
 
 import es.AR.dto.ResiduosDTO
 import es.AR.models.Residuos
-import es.AR.models.enums.Lote
 import es.AR.models.enums.TipoResiduo
 import es.AR.utils.ParseFloat
+import kotlinx.serialization.encodeToString
+import nl.adaptivity.xmlutil.serialization.XML
 import utils.ParseTipo
+import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -14,21 +16,21 @@ import java.nio.file.Path
  * Clase que se encarga del mapeo de los Residuos
  * Creacion de CSV, JSON y XML
  */
-class ResiduosMapper {
+object ResiduosMapper {
 
     /**
      * Metodo que coje un ResiduoDTO y lo transforma a un objeto de tipo Residuo
      * @param residuosDTO es el objeto de tipo residuosDTO a convertir
      * @return el objeto de TIPO Residuos
      */
-    fun dtoToResiduos(residuosDTO: ResiduosDTO): Residuos {
+    fun ResiduosDTO.dtoToResiduos(): Residuos {
         return Residuos(
-            year = residuosDTO.year,
-            month = residuosDTO.month,
-            lote = ParseTipo().stringLoteToTypeLote(residuosDTO.lote),
-            residuos = TipoResiduo.valueOf(residuosDTO.residuos),
-            nombre_distrito = residuosDTO.nombre_distrito,
-            toneladas = residuosDTO.toneladas
+            year = this.year,
+            month = this.month,
+            lote = ParseTipo().stringLoteToTypeLote(this.lote),
+            residuos = TipoResiduo.valueOf(this.residuos),
+            nombre_distrito = this.nombre_distrito,
+            toneladas = this.toneladas
         )
     }
 
@@ -39,14 +41,14 @@ class ResiduosMapper {
      * @param residuos
      * @return
      */
-    fun residuosToResiduosDTO(residuos:Residuos):ResiduosDTO{
+    fun Residuos.residuosToResiduosDTO():ResiduosDTO{
         return ResiduosDTO(
-            year = residuos.year,
-            month = residuos.month,
-            lote=residuos.lote.name,
-            residuos=residuos.residuos.name,
-            nombre_distrito = residuos.nombre_distrito,
-            toneladas = residuos.toneladas
+            year = this.year,
+            month = this.month,
+            lote=this.lote.name,
+            residuos=this.residuos.name,
+            nombre_distrito = this.nombre_distrito,
+            toneladas = this.toneladas
         )
     }
 
@@ -62,12 +64,11 @@ class ResiduosMapper {
             .map { mapToResiduo(it) }.toList()
     }
 
-    fun residuoDTOToxml(path:String,listResiduosDTO:List<ResiduosDTO>){
-
-
-    }
-
-
+ /*  fun residuoDTOToxml(path:String,listResiduosDTO:List<ResiduosDTO>){
+       val xml= XML {indentString= " "}
+       val fichero = File(path + File.separator +  "intercambio.xml")
+       fichero.writeText(xml.encodeToString(listResiduosDTO))
+   }*/ // si descomentas esto el programa te dice que te vayas a hacer una
 
     /**
      * TODO
@@ -80,50 +81,12 @@ class ResiduosMapper {
         return Residuos(
             year = campo[0].toShort(),
             month = campo[1],
-            lote = stringLoteToTypeLote(campo[2]),
-            residuos = stringResiduoToTypeResiduo(campo[3]),
+            lote =ParseTipo().stringLoteToTypeLote(campo[2]),
+            residuos =ParseTipo().stringResiduoToTypeResiduo(campo[3]),
             nombre_distrito = campo[5],
             toneladas = ParseFloat().stringToFloat(campo[6]),
         )
     }
-
-
-
-    /**
-     * TODO
-     *
-     * @param campo
-     * @return
-     */
-    private fun stringResiduoToTypeResiduo(campo: String): TipoResiduo {
-        var type: TipoResiduo = TipoResiduo.ENVASES
-        when (campo) {
-            "RESTO" -> type = TipoResiduo.RESTO
-            "ENVASES" -> type = TipoResiduo.ENVASES
-            "VIDRIO" -> type = TipoResiduo.VIDRIO
-            "ORGANICA" -> type = TipoResiduo.ORGANICA
-            "PAPEL Y CARTON" -> type = TipoResiduo.PAPEL_CARTON
-            "PUNTOS LIMPIOS" -> type = TipoResiduo.PUNTOS_LIMPIOS
-            "CARTON COMERCIAL" -> type = TipoResiduo.CARTON_COMERCIAL
-            "VIDRIO COMERCIAL" -> type = TipoResiduo.VIDRIO_COMERCIAL
-            "PILAS" -> type = TipoResiduo.PILAS
-            "ANIMALES MUERTOS" -> type = TipoResiduo.ANIMALES_MUERTOS
-            "RCD" -> type = TipoResiduo.RCD
-            "CONTENEDORES DE ROPA USADA" -> type = TipoResiduo.CONTENEDORES_ROPA_USADA
-            "CAMA DE CABALLO" -> type = TipoResiduo.CAMA_CABALLO
-        }
-        return type
-    }
-    protected fun stringLoteToTypeLote(campo: String): Lote {
-        var type: Lote = Lote.UNO
-        when (campo) {
-            "1" -> type = Lote.UNO
-            "2" -> type = Lote.DOS
-            "3" -> type = Lote.TRES
-        }
-        return type
-    }
-
 
 
 }
