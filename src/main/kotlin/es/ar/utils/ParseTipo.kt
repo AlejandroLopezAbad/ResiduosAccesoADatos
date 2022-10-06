@@ -1,4 +1,4 @@
-package utils
+package es.ar.utils
 
 import es.ar.models.enums.Lote
 import es.ar.models.enums.TipoContendor

@@ -14,3 +14,11 @@ fun esCSVResiduos(path: String): Boolean{
 fun esCSVContenedores(file: File): Boolean {
 return false
 }
+
+fun validarExtension(path_origen: String): Boolean {
+return path_origen.endsWith(".csv") || path_origen.endsWith(".json") || path_origen.endsWith(".xml")
+}
+
+fun validarDirectorio(path_origen: String, path_final: String): Boolean {
+    return File(path_origen).exists() && File(path_final).exists()
+}
