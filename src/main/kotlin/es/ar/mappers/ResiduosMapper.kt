@@ -3,11 +3,11 @@ package es.ar.mappers
 import es.ar.dto.ResiduosDTO
 import es.ar.models.Residuos
 import es.ar.models.enums.TipoResiduo
-import es.ar.utils.ParseFloat
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import nl.adaptivity.xmlutil.serialization.XML
-import utils.ParseTipo
+import es.ar.utils.ParseTipo
+import es.ar.utils.stringToFloat
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -76,10 +76,10 @@ object ResiduosMapper {
         return Residuos(
             year = campo[0].toShort(),
             month = campo[1],
-            lote =ParseTipo().stringLoteToTypeLote(campo[2]),
-            residuos =ParseTipo().stringResiduoToTypeResiduo(campo[3]),
+            lote = ParseTipo().stringLoteToTypeLote(campo[2]),
+            residuos = ParseTipo().stringResiduoToTypeResiduo(campo[3]),
             nombre_distrito = campo[5],
-            toneladas = ParseFloat().stringToFloat(campo[6]),
+            toneladas = stringToFloat(campo[6]),
         )
     }
 

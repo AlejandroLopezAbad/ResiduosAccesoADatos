@@ -1,24 +1,12 @@
 package es.ar
 
 
-import es.ar.mappers.ContenedoresMapper.contenedorToCSV
-import es.ar.mappers.ContenedoresMapper.contenedorToJson
-import es.ar.mappers.ContenedoresMapper.contenedorToXML
-import es.ar.mappers.ContenedoresMapper.contenedoresToContenedoresDTO
-import es.ar.mappers.ContenedoresMapper.csvReaderToContenedores
-import es.ar.mappers.ResiduosMapper
-import es.ar.mappers.ResiduosMapper.csvReaderToResiduo
-import es.ar.mappers.ResiduosMapper.residuoToCSV
-import es.ar.mappers.ResiduosMapper.residuoToJson
-import es.ar.mappers.ResiduosMapper.residuoToXML
-import es.ar.mappers.ResiduosMapper.residuosToResiduosDTO
-import es.ar.utils.esCSVResiduos
-
-
-import java.io.File
+import es.ar.utils.validarDirectorio
+import es.ar.utils.validarExtension
 
 fun main (args: Array<String>){
-
+    
+    /*
     val pathResiduos: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator+"modelo_residuos_2021.csv"
     val pathContenedores: String = System.getProperty("user.dir")+ File.separator+"data" + File.separator+"contenedores_varios.csv"
     val pathResiduos2: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator
@@ -32,5 +20,43 @@ fun main (args: Array<String>){
     contenedorToCSV(pathResiduos2, listaContenedoresDTO)
     contenedorToJson(pathResiduos2,listaContenedoresDTO)
     contenedorToXML(pathResiduos2, listaContenedoresDTO)
+     */
 
 }
+
+fun comprobarPrograma(args: Array<String>): String {
+    if (args.size < 2 || args.size >= 5) {
+        throw Exception("Argumentos no válidos")
+    }
+    val argMax = args.size
+    //TODO Decidir si el argumento nos da igual que lo meta en mayuscula o minuscula o solo en minuscula
+    //TODO Intentar optimizar este codigo
+    if (args[0] == "parser") {
+        val pathOrigen = args[1]
+        val pathFinal = args[2]
+        if (validarExtension(pathOrigen)) {
+            return "Parsear"
+        }
+    } else if (args[0] == "resumen" && args.size == 3) {
+        val pathOrigen = args[1]
+        val pathFinal = args[2]
+        if (validarDirectorio(pathOrigen, pathFinal) && validarExtension(pathOrigen)) {
+            return "Parsear"
+        } else {
+            throw Exception("Extensión no válida")
+        }
+    } else if (args[0] == "resumen" && args[1] == "distrito") {
+        val pathOrigen = args[2]
+        val pathFinal = args[3]
+        if (validarDirectorio(pathOrigen, pathFinal) && validarExtension(pathOrigen)) {
+            return "Parsear"
+        } else {
+            throw Exception("Extensión no válida")
+        }
+    }
+    throw Exception("Argumentos no válidos")
+}
+
+
+
+

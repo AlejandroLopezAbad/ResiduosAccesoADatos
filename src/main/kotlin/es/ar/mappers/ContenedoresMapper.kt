@@ -1,14 +1,12 @@
 package es.ar.mappers
 
 import es.ar.dto.ContenedoresDTO
-import es.ar.dto.ResiduosDTO
-import es.ar.mappers.ContenedoresMapper.dtoToContenedores
 import es.ar.models.Contenedores
 import es.ar.models.enums.TipoContendor
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import nl.adaptivity.xmlutil.serialization.XML
-import utils.ParseTipo
+import es.ar.utils.ParseTipo
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
