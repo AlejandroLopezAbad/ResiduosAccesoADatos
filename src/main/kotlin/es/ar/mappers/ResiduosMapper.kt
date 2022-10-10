@@ -21,8 +21,9 @@ object ResiduosMapper {
 
     /**
      * Metodo que coje un ResiduoDTO y lo transforma a un objeto de tipo Residuo
+     *
      * @param residuosDTO es el objeto de tipo residuosDTO a convertir
-     * @return el objeto de TIPO Residuos
+     * @return el objeto de tipo Residuos
      */
     fun ResiduosDTO.dtoToResiduos(): Residuos {
         return Residuos(
@@ -37,10 +38,10 @@ object ResiduosMapper {
 
 
     /**
-     * TODO
+     * Metodo que coje un ResiduoDTO y lo transforma a un objeto de tipo Residuo
      *
-     * @param residuos
-     * @return
+     * @param residuos es el objeto de tipo Residuo a convertir
+     * @return El objeto de tipo ResiduoDTO
      */
     fun Residuos.residuosToResiduosDTO():ResiduosDTO{
         return ResiduosDTO(
@@ -54,10 +55,10 @@ object ResiduosMapper {
     }
 
     /**
-     * TODO
+     * Método que lee un archivo CSV y lo convierte a una lista de tipo Residuos
      *
-     * @param path
-     * @return
+     * @param path Ruta del archivo
+     * @return Una lista de tipo Residuos
      */
     fun csvReaderToResiduo(path:String):List<Residuos>{
         return Files.lines(Path.of(path))
@@ -66,10 +67,10 @@ object ResiduosMapper {
     }
 
     /**
-     * TODO
+     * Metodo que tranforma una cadena de string en un objeto de tipo residuo
      *
-     * @param linea
-     * @return
+     * @param linea cadena a transformar
+     * @return El objeto de tipo residuo
      */
     private fun mapToResiduo(linea:String):Residuos{
         val campo=linea.split(";")
@@ -91,7 +92,7 @@ object ResiduosMapper {
      */
     fun residuoToCSV(path:String, lista:List<ResiduosDTO>){
         val file = File(path + "residuos.csv")
-        file.writeText("Año;Mes;Residuo;Lote;Nombre_Distrito;Toneladas")
+        file.writeText("year;month;residuo;lote;nombreDistrito;toneladas")
         lista.forEach {
             file.appendText("\n${it.year};${it.month};${it.residuos};${it.lote};${it.nombre_distrito};${it.toneladas}")
         }

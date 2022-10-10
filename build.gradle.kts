@@ -21,7 +21,7 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core:jackson-core:2.14.0-rc1")
     implementation("org.jdom:jdom:2.0.2")
-    //implementation("org.jetbrains.kotlinx:dataframe:0.8.1")
+    implementation("org.jetbrains.kotlinx:dataframe:0.8.1")
     implementation("org.jetbrains.lets-plot:lets-plot-kotlin:4.0.0")
     implementation("org.jetbrains.lets-plot:lets-plot-image-export:2.4.0")
     implementation("io.github.pdvrieze.xmlutil:core-jvm:0.84.3")

@@ -5,7 +5,12 @@ import es.ar.models.enums.TipoContendor
 import es.ar.models.enums.TipoResiduo
 
 class ParseTipo() {
-
+    /**
+     * Convierte una cadena en un tipo de Lote.
+     *
+     * @param campo -> Campo a transformar
+     * @return El tipo de Lote
+     */
     fun stringLoteToTypeLote(campo: String): Lote {
         var type: Lote = Lote.UNO
         when (campo) {
@@ -17,10 +22,10 @@ class ParseTipo() {
     }
 
     /**
-     * TODO
+     * Convierte una cadena en un tipo de residuo.
      *
-     * @param campo
-     * @return
+     * @param campo -> Campo a transformar
+     * @return El tipo de Residuo
      */
   fun stringResiduoToTypeResiduo(campo: String): TipoResiduo {
         var type: TipoResiduo = TipoResiduo.ENVASES
@@ -43,10 +48,10 @@ class ParseTipo() {
     }
 
     /**
-     * TODO
+     * Convierte una cadena en un tipo de contenedor.
      *
-     * @param campo
-     * @return
+     * @param campo -> Campo a transformar
+     * @return El tipo de contenedor
      */
     fun stringContenedorToTypeContenedor(campo: String): TipoContendor {
         var type: TipoContendor = TipoContendor.ENVASES
