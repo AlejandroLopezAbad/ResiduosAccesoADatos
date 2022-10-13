@@ -1,19 +1,32 @@
 package es.ar.models
 
 import es.ar.dto.ResiduosDTO
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import nl.adaptivity.xmlutil.serialization.XML
+import nl.adaptivity.xmlutil.serialization.XmlElement
 import java.io.File
+import java.time.LocalDateTime
+import java.util.*
 
-/**
+
+@Serializable
+@SerialName("Bitácora")
 class Bitacora (
+    @XmlElement(true)
     val opcion_elegida: String,
+    @XmlElement(true)
     val exito: Boolean,
+    @XmlElement(true)
     val tiempo: Long,
+    @XmlElement(true)
     val path: String
 ) {
-    val id: UUID = UUID.randomUUID()
-    val instante: LocalDateTime = LocalDateTime.now()
+    @XmlElement(true)
+    val id: String = UUID.randomUUID().toString()
+    @XmlElement(true)
+    val instante: String = LocalDateTime.now().toString()
 
     init {
         crearBitacora()
@@ -23,8 +36,9 @@ class Bitacora (
             indentString = " "
         }
         val fichero = File(path + File.separator + "Bitacora.xml")
-        fichero.writeText(xml.encodeToString(this))
+        fichero.appendText("\n")
+        fichero.appendText(xml.encodeToString(this))
     }
 }
-*/
+
 

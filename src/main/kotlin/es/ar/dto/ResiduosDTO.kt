@@ -3,7 +3,9 @@ package es.ar.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.serialization.XmlElement
+import org.jetbrains.kotlinx.dataframe.annotations.DataSchema
 
+@DataSchema
 @Serializable
 @SerialName("Residuos")
 data class ResiduosDTO(
