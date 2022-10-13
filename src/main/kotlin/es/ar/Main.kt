@@ -36,7 +36,7 @@ fun main (args: Array<String>){
     when(comprobarPrograma(args)) {
         "Parsear" -> controller.programaParser(args[1], args[2])
         "Resumen" -> controller.programaResumen(args[1], args[2])
-        "ResumenDistrito" -> controller.programaResumenDistrito(args[1], args[2], args[3])
+        "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[4])
     }
     //val df = listaResiduos.toDataFrame()
     //df.schema().print()
@@ -45,7 +45,7 @@ fun main (args: Array<String>){
 }
 
 fun comprobarPrograma(args: Array<String>): String {
-    if (args.size < 2 || args.size >= 5) {
+    if (args.size < 2 || args.size > 5) {
         throw Exception("Argumentos no válidos")
     }
     val argMax = args.size
@@ -68,7 +68,7 @@ fun comprobarPrograma(args: Array<String>): String {
     } else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args[1].lowercase(Locale.getDefault()) == "distrito") {
         val pathOrigen = args[2]
         val pathFinal = args[3]
-        if (validarDirectorio(pathOrigen, pathFinal) && validarExtension(pathOrigen)) {
+        if (validarDirectorio(pathOrigen, pathFinal)){ //&& validarExtension(pathOrigen)) {
             return "ResumenDistrito"
         } else {
             throw Exception("Extensión no válida")
