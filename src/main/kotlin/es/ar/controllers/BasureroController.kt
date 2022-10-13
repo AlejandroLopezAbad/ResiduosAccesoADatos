@@ -19,6 +19,7 @@ class BasureroController {
     private val path = dir + File.separator + "data" + File.separator
 
     //TODO Controlar que el archivo csv es cualquier nombre pero el contenido es igual que en Ficheros.kt
+    //TODO Cambiar para que lo coja como directorio
     fun programaParser(pathOrigen: String, pathFinal: String){
         if(esCSVResiduos(pathOrigen)){
             val listaResiduos= ResiduosMapper.csvReaderToResiduo(path + pathOrigen )
@@ -37,6 +38,7 @@ class BasureroController {
         }
     }
 
+    //TODO Hacer gráficas
     fun programaResumen(pathOrigen: String, pathFinal: String) {
         val tiempoInicial = System.currentTimeMillis()
         val listaResiduos =
@@ -47,16 +49,15 @@ class BasureroController {
                 .toDataFrame()
         listaResiduos.schema().print()
         listaContenedores.schema().print()
-        //TODO Realizar las consultas
         // Número de contenedores de cada tipo que hay en cada distrito.
         listaContenedores
             .groupBy("distrito", "type_Contenedor")
             .count().sortBy("distrito").print()
 
         //Media de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
-        listaResiduos
+        var prueba = listaResiduos
             .groupBy("nombre_distrito", "residuos", "year")
-            .aggregate {mean("toneladas") into "Media_Toneladas"}
+            .aggregate { mean("toneladas") into "Media_Toneladas" }
             .sortBy("nombre_distrito").print()
 
         //Máximo, mínimo, media y desviación de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
@@ -87,7 +88,6 @@ class BasureroController {
     }
 
     fun programaResumenDistrito(pathOrigen: String, pathFinal: String, distrito: String) {
-        //TODO Realizar las consultas
         //TODO Comprobar que el distrito exista
         val tiempoInicial = System.currentTimeMillis()
         val listaResiduos =
@@ -108,8 +108,18 @@ class BasureroController {
             .filter { it["nombre_distrito"] == distrito }
             .groupBy("nombre_distrito", "residuos")
             .aggregate { sum("toneladas") into "Toneladas_Totales" }
-            .sortBy("nombre_distrito").print()
+            .print()
 
+        //Máximo, mínimo , media y desviación por mes por residuo en dicho distrito.
+        listaResiduos
+            .filter { it["nombre_distrito"] == distrito }
+            .groupBy("month", "nombre_distrito", "residuos")
+            .aggregate {
+                max("toneladas") into "Máximo_Toneladas"
+                min("toneladas") into "Mínimo_Toneladas"
+                mean("toneladas") into "Media_Toneladas"
+                std("toneladas").toString().replace("NaN", "0") into "Desviación_Toneladas"
+            }.print()
 
     }
 
