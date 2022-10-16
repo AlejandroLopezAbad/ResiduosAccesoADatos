@@ -77,10 +77,10 @@ object ContenedoresMapper {
     }
 
     /**
-     *
-     *
-     * @param path
-     * @param lista
+     * Metodo que coge una lista de COntenedoresDTO y lo transforma a un csv con los datos
+     * que hemos querido guardar
+     * @param path localizacion de donde vamos a guardar el csv
+     * @param lista la lista de contenedoresDTO que se transformara en el nuevo csv
      */
     fun contenedorToCSV(path:String, lista:List<ContenedoresDTO>){
         val file = File(path + "contenedor.csv")
@@ -91,10 +91,10 @@ object ContenedoresMapper {
     }
 
     /**
-     * TODO
+     * Metodo que coge una lista de ContenedoresDTO y lo transforma a un JSON
      *
-     * @param path
-     * @param contenedorDto
+     * @param path  localización donde se guardara el JSON
+     * @param contenedorDto  la lista de contenedoresDTO que se transformara en un archivo JSON
      */
     fun contenedorToJson(path:String, contenedorDto: List<ContenedoresDTO>) {
         val file = File(path + "contenedor.json")

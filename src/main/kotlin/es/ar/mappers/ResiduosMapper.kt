@@ -106,7 +106,7 @@ object ResiduosMapper {
      * Metodo que coge una lista de ResiduosDTO y lo transforma a un JSON con formato pretty
      *
      * @param path localización donde se guardara el JSON
-     * @param residuosDto l la lista de residuosDTO que se transformara en un archivo JSON
+     * @param residuosDto  la lista de residuosDTO que se transformara en un archivo JSON
      */
     fun residuoToJson(path:String, residuosDto: List<ResiduosDTO>) {
         val file = File(path + "residuos.json")
@@ -149,7 +149,8 @@ object ResiduosMapper {
      * @param path el directorio donde se encuentra el archivo que vamos a leer
      * @return Devuelve una lista de ResiduosDTO
      */
-
+        //TODO mirar si hay que meter filtros para comprobar que no pete tipo
+    //meter uno vacio otro nulo y tal
     fun xmlToResiduoDTO(path:String):List<ResiduosDTO>{
         val xmlResiduo = XML {indentString = "  "}
         val fichero = File(path)
