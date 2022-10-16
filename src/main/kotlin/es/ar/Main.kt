@@ -42,6 +42,9 @@ fun main (args: Array<String>){
     //df.schema().print()
     Bitacora("parser", true, System.currentTimeMillis(), pathResiduos2)
 
+
+
+
 }
 
 fun comprobarPrograma(args: Array<String>): String {
