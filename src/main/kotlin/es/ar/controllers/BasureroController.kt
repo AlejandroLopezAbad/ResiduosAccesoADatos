@@ -8,6 +8,7 @@ import es.ar.models.Contenedores
 import es.ar.models.Residuos
 import es.ar.utils.esCSVContenedores
 import es.ar.utils.esCSVResiduos
+import es.ar.utils.validarExtension
 import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.letsPlot.LetsPlot
 import org.jetbrains.letsPlot.Stat.identity
@@ -25,20 +26,21 @@ class BasureroController {
     private val dir: String = System.getProperty("user.dir")
     private val path = dir + File.separator + "data" + File.separator
 
-    //TODO Controlar que el archivo csv es cualquier nombre pero el contenido es igual que en Ficheros.kt
-    /*
+    /**
      * Metodo que se encarga de ejecutar la primera consulta del ejercicio que se trata de PARSER
      * en la cual tenemos que coger la informacion de los contenedores y de la recodiga , idependientemente de la
      * extension que tenga el archivo
+     *
+     * @param pathOrigen Directorio
+     * @param pathFinal
      */
     fun programaParser(pathOrigen: String, pathFinal: String) {
-        if (esCSVResiduos(pathOrigen)) {
+        if (esCSVResiduos(pathOrigen + File.separator + "modelo_residuos_2021.csv") && esCSVContenedores(pathOrigen + File.separator + "contenedores_varios.csv")) {
             val listaResiduos = ResiduosMapper.csvReaderToResiduo(path + pathOrigen)
             val listaResiduosDTO = listaResiduos.map { it.residuosToResiduosDTO() }
             ResiduosMapper.residuoToCSV(pathFinal, listaResiduosDTO)
             ResiduosMapper.residuoToJson(pathFinal, listaResiduosDTO)
             ResiduosMapper.residuoToXML(pathFinal, listaResiduosDTO)
-        } else if (esCSVContenedores(pathOrigen)) {
             val listaContenedores =
                 ContenedoresMapper.csvReaderToContenedores(pathOrigen + File.separator + "contenedores_varios.csv")
             val listaContenedoresDTO = listaContenedores.map { it.contenedoresToContenedoresDTO() }
@@ -52,56 +54,67 @@ class BasureroController {
 
     //TODO Hacer gráficas
     fun programaResumen(pathOrigen: String, pathFinal: String) {
-        val tiempoInicial = System.currentTimeMillis()
-        val listaResiduos =
-            ResiduosMapper.csvReaderToResiduo(dir + File.separator + pathOrigen + File.separator + "modelo_residuos_2021.csv")
-                .toDataFrame()
-        val listaContenedores =
-            ContenedoresMapper.csvReaderToContenedores(dir + File.separator + pathOrigen + File.separator + "contenedores_varios.csv")
-                .toDataFrame()
-        listaResiduos.schema().print()
-        listaContenedores.schema().print()
-        // Número de contenedores de cada tipo que hay en cada distrito.
-        listaContenedores
-            .groupBy("distrito", "type_Contenedor")
-            .count().sortBy("distrito").print()
+        val pathResiduos = dir + File.separator + pathOrigen + File.separator + "modelo_residuos_2021.csv"
+        val pathContenedores = dir + File.separator + pathOrigen + File.separator + "contenedores_varios.csv"
+        if(validarExtension(pathResiduos) && validarExtension(pathContenedores)){
+            val tiempoInicial = System.currentTimeMillis()
+            val listaResiduos =
+                ResiduosMapper.csvReaderToResiduo(pathResiduos)
+                    .toDataFrame()
+            val listaContenedores =
+                ContenedoresMapper.csvReaderToContenedores(pathContenedores)
+                    .toDataFrame()
+            listaResiduos.schema().print()
+            listaContenedores.schema().print()
+            // Número de contenedores de cada tipo que hay en cada distrito.
+            listaContenedores
+                .groupBy("distrito", "type_Contenedor")
+                .count().sortBy("distrito").print()
 
-        //Media de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
-        var prueba = listaResiduos
-            .groupBy("nombre_distrito", "residuos", "year")
-            .aggregate { mean("toneladas") into "Media_Toneladas" }
-            .sortBy("nombre_distrito").print()
+            // Media de contenedores de cada tipo que hay en cada distrito.
+            listaContenedores
+                .groupBy("distrito", "type_Contenedor")
+                .mean().sortBy("distrito").print()
 
-        //Máximo, mínimo, media y desviación de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
-        listaResiduos
-            .groupBy("nombre_distrito", "residuos", "year")
-            .aggregate {
-                min("toneladas") into "Mínimo_Toneladas"
-                max("toneladas") into "Máximo_Toneladas"
-                mean("toneladas") into "Media_Toneladas"
-                std("toneladas") into "Desviación_Toneladas"
-            }.sortBy("nombre_distrito").print()
+            //Media de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
+            listaResiduos
+                .groupBy("nombre_distrito", "residuos", "year")
+                .aggregate { mean("toneladas") into "Media_Toneladas" }
+                .sortBy("nombre_distrito").print()
 
-        //Suma de to do lo recogido en un año por distrito.
-        listaResiduos
-            .groupBy("nombre_distrito")
-            .aggregate { sum("toneladas") into "Toneladas_Totales" }
-            .sortBy("nombre_distrito").print()
+            //Máximo, mínimo, media y desviación de toneladas anuales de recogidas por cada tipo de basura agrupadas por distrito.
+            listaResiduos
+                .groupBy("nombre_distrito", "residuos", "year")
+                .aggregate {
+                    min("toneladas") into "Mínimo_Toneladas"
+                    max("toneladas") into "Máximo_Toneladas"
+                    mean("toneladas") into "Media_Toneladas"
+                    std("toneladas") into "Desviación_Toneladas"
+                }.sortBy("nombre_distrito").print()
+
+            //Suma de to do lo recogido en un año por distrito.
+            listaResiduos
+                .groupBy("nombre_distrito")
+                .aggregate { sum("toneladas") into "Toneladas_Totales" }
+                .sortBy("nombre_distrito").print()
 
 
-        //Por cada distrito obtener para cada tipo de residuo la cantidad recogida.
-        listaResiduos
-            .groupBy("nombre_distrito", "residuos")
-            .aggregate {
-                sum("toneladas") into "Total_Toneladas"
-            }.sortBy("nombre_distrito").print()
+            //Por cada distrito obtener para cada tipo de residuo la cantidad recogida.
+            listaResiduos
+                .groupBy("nombre_distrito", "residuos")
+                .aggregate {
+                    sum("toneladas") into "Total_Toneladas"
+                }.sortBy("nombre_distrito").print()
 
-        val tiempoFinal = System.currentTimeMillis()
-        println("El tiempo de ejecución es de: ${(tiempoFinal - tiempoInicial)} milisegundos ")
+            val tiempoFinal = System.currentTimeMillis()
+            println("El tiempo de ejecución es de: ${(tiempoFinal - tiempoInicial)} milisegundos ")
+        }else{
+            println("La extensión no es válida")
+        }
+
     }
 
     fun programaResumenDistrito(pathOrigen: String, pathFinal: String, distrito: String) {
-        //TODO Comprobar que el distrito exista
         val tiempoInicial = System.currentTimeMillis()
         val listaResiduos =
             ResiduosMapper.csvReaderToResiduo(dir + File.separator + pathOrigen + File.separator + "modelo_residuos_2021.csv")

@@ -10,17 +10,22 @@ import java.util.*
 
 fun main (args: Array<String>){
     val controller: BasureroController = BasureroController()
-    val pathResiduos: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator+"modelo_residuos_2021.csv"
     val pathResiduos2: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator
-    val pathResiduos3: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator+"residuos.csv"
-    val pathContenedores: String = System.getProperty("user.dir")+ File.separator+"data" + File.separator+"contenedores_varios.csv"
-
-    when(comprobarPrograma(args)) {
-        "Parsear" -> controller.programaParser(args[1], args[2])
-        "Resumen" -> controller.programaResumen(args[1], args[2])
-        "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[4])
+    var exito = true;
+    try {
+        when(comprobarPrograma(args)) {
+            "Parsear" -> controller.programaParser(args[1], args[2])
+            "Resumen" -> controller.programaResumen(args[1], args[2])
+            "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[4])
+        }
+    }catch (e:Exception) {
+        e.printStackTrace()
+        exito = false
+    }finally {
+        Bitacora("parser", exito, System.currentTimeMillis(), pathResiduos2)
     }
-    Bitacora("parser", true, System.currentTimeMillis(), pathResiduos2)
+
+
 
 }
 
@@ -28,12 +33,9 @@ fun comprobarPrograma(args: Array<String>): String {
     if (args.size < 2 || args.size > 5) {
         throw Exception("Argumentos no válidos")
     }
-    //TODO Decidir si el argumento nos da igual que lo meta en mayuscula o minuscula o solo en minuscula
-    //TODO Intentar optimizar este codigo
-    if (args[0].lowercase(Locale.getDefault()) == "parser") {
+    if (args[0] == "parser") {
         val pathOrigen = args[1]
         val pathFinal = args[2]
-        //TODO Cambiar para que coja directorio
         if ( validarDirectorio(pathOrigen, pathFinal)) { //&&
             return "Parsear"
         }
@@ -41,12 +43,11 @@ fun comprobarPrograma(args: Array<String>): String {
     else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args.size == 3) {
         val pathOrigen = args[1]
         val pathFinal = args[2]
-        if (validarDirectorio(pathOrigen, pathFinal) && validarExtension(pathOrigen)) {
+        if (validarDirectorio(pathOrigen, pathFinal)) {
             return "Resumen"
         } else {
             throw Exception("Extensión no válida")
         }
-        //TODO Comprobar que el distrito funcione
     } else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args[1].lowercase(Locale.getDefault()) == "distrito") {
         val pathOrigen = args[2]
         val pathFinal = args[3]

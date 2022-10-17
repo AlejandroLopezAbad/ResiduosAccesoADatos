@@ -3,6 +3,7 @@ package es.ar.models
 import es.ar.dto.ResiduosDTO
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -31,13 +32,32 @@ class Bitacora (
     init {
         crearBitacora()
     }
+
+    private fun leerBitacora(path:String): List<Bitacora> {
+            val xmlBitacora = XML {indentString = "  "}
+            val fichero = File(path + "Bitacora.xml")
+            return xmlBitacora.decodeFromString(fichero.readText())
+    }
+
     private fun crearBitacora() {
-        val xml = XML{
-            indentString = " "
+        if(File(path + "Bitacora.xml").exists()){
+            var lista = leerBitacora(path)
+            lista += Bitacora(opcion_elegida, exito, System.currentTimeMillis(), path)
+
+            val xml = XML{
+                indentString = " "
+            }
+            val fichero = File(path + File.separator + "Bitacora.xml")
+            fichero.appendText("\n")
+            fichero.appendText(xml.encodeToString(lista))
+        }else {
+            val xml = XML {
+                indentString = " "
+            }
+            val fichero = File(path + File.separator + "Bitacora.xml")
+            fichero.appendText("\n")
+            fichero.appendText(xml.encodeToString(this))
         }
-        val fichero = File(path + File.separator + "Bitacora.xml")
-        fichero.appendText("\n")
-        fichero.appendText(xml.encodeToString(this))
     }
 }
 
