@@ -3,6 +3,7 @@ package es.ar
 import es.ar.controllers.BasureroController
 import es.ar.models.Bitacora
 import es.ar.utils.validarDirectorio
+import es.ar.utils.validarExtension
 
 import java.io.File
 import java.util.*
@@ -21,9 +22,6 @@ fun main (args: Array<String>){
     }
     Bitacora("parser", true, System.currentTimeMillis(), pathResiduos2)
 
-
-
-
 }
 
 fun comprobarPrograma(args: Array<String>): String {
@@ -39,11 +37,11 @@ fun comprobarPrograma(args: Array<String>): String {
         if ( validarDirectorio(pathOrigen, pathFinal)) { //&&
             return "Parsear"
         }
-    } //TODO Leer JSON y XML para opción resumen
+    }
     else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args.size == 3) {
         val pathOrigen = args[1]
         val pathFinal = args[2]
-        if (validarDirectorio(pathOrigen, pathFinal)){ //&& validarExtension(pathOrigen)) {
+        if (validarDirectorio(pathOrigen, pathFinal) && validarExtension(pathOrigen)) {
             return "Resumen"
         } else {
             throw Exception("Extensión no válida")
@@ -52,7 +50,7 @@ fun comprobarPrograma(args: Array<String>): String {
     } else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args[1].lowercase(Locale.getDefault()) == "distrito") {
         val pathOrigen = args[2]
         val pathFinal = args[3]
-        if (validarDirectorio(pathOrigen, pathFinal)){ //&& validarExtension(pathOrigen)) {
+        if (validarDirectorio(pathOrigen, pathFinal)) {
             return "ResumenDistrito"
         } else {
             throw Exception("Extensión no válida")
