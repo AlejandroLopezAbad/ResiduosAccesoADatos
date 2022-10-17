@@ -13,7 +13,7 @@ fun main (args: Array<String>){
     val pathResiduos2: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator
     var exito = true;
     try {
-        when(comprobarPrograma(args)) {
+        when(controller.comprobarPrograma(args)) {
             "Parsear" -> controller.programaParser(args[1], args[2])
             "Resumen" -> controller.programaResumen(args[1], args[2])
             "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[4])
@@ -24,41 +24,9 @@ fun main (args: Array<String>){
     }finally {
         Bitacora("parser", exito, System.currentTimeMillis(), pathResiduos2)
     }
-
-
-
 }
 
-fun comprobarPrograma(args: Array<String>): String {
-    if (args.size < 2 || args.size > 5) {
-        throw Exception("Argumentos no válidos")
-    }
-    if (args[0] == "parser") {
-        val pathOrigen = args[1]
-        val pathFinal = args[2]
-        if ( validarDirectorio(pathOrigen, pathFinal)) { //&&
-            return "Parsear"
-        }
-    }
-    else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args.size == 3) {
-        val pathOrigen = args[1]
-        val pathFinal = args[2]
-        if (validarDirectorio(pathOrigen, pathFinal)) {
-            return "Resumen"
-        } else {
-            throw Exception("Extensión no válida")
-        }
-    } else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args[1].lowercase(Locale.getDefault()) == "distrito") {
-        val pathOrigen = args[2]
-        val pathFinal = args[3]
-        if (validarDirectorio(pathOrigen, pathFinal)) {
-            return "ResumenDistrito"
-        } else {
-            throw Exception("Extensión no válida")
-        }
-    }
-    throw Exception("Argumentos no válidos")
-}
+
 
 
 

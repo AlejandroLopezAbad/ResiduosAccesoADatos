@@ -8,6 +8,7 @@ import es.ar.models.Contenedores
 import es.ar.models.Residuos
 import es.ar.utils.esCSVContenedores
 import es.ar.utils.esCSVResiduos
+import es.ar.utils.validarDirectorio
 import es.ar.utils.validarExtension
 import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.letsPlot.LetsPlot
@@ -25,6 +26,37 @@ import kotlin.math.nextUp
 class BasureroController {
     private val dir: String = System.getProperty("user.dir")
     private val path = dir + File.separator + "data" + File.separator
+
+    fun comprobarPrograma(args: Array<String>): String {
+        if (args.size < 2 || args.size > 5) {
+            throw Exception("Argumentos no válidos")
+        }
+        if (args[0] == "parser") {
+            val pathOrigen = args[1]
+            val pathFinal = args[2]
+            if ( validarDirectorio(pathOrigen, pathFinal)) { //&&
+                return "Parsear"
+            }
+        }
+        else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args.size == 3) {
+            val pathOrigen = args[1]
+            val pathFinal = args[2]
+            if (validarDirectorio(pathOrigen, pathFinal)) {
+                return "Resumen"
+            } else {
+                throw Exception("Extensión no válida")
+            }
+        } else if (args[0].lowercase(Locale.getDefault()) == "resumen" && args[1].lowercase(Locale.getDefault()) == "distrito") {
+            val pathOrigen = args[2]
+            val pathFinal = args[3]
+            if (validarDirectorio(pathOrigen, pathFinal)) {
+                return "ResumenDistrito"
+            } else {
+                throw Exception("Extensión no válida")
+            }
+        }
+        throw Exception("Argumentos no válidos")
+    }
 
     /**
      * Metodo que se encarga de ejecutar la primera consulta del ejercicio que se trata de PARSER
