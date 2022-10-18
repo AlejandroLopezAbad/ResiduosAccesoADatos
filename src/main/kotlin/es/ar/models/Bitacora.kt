@@ -51,11 +51,10 @@ class Bitacora (
             val xml = XML {
                 indentString = " "
             }
-            val listaBitacora = listOf(Bitacora("parser", true, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"),
-                Bitacora("parser", false, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"),
-                Bitacora("resumen", true, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"))
+            val listaBitacora = listOf(Bitacora("inicializador", true, System.currentTimeMillis(), "inicializador"))
             val fichero = File(path + File.separator + "Bitacora.xml")
             fichero.writeText(xml.encodeToString(listaBitacora))
+            crearBitacora()
         }
     }
 }
