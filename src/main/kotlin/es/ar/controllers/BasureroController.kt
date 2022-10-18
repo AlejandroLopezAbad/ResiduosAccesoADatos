@@ -21,12 +21,14 @@ import org.jetbrains.letsPlot.Stat.identity
 import org.jetbrains.letsPlot.export.ggsave
 import org.jetbrains.letsPlot.geom.geomBar
 import org.jetbrains.letsPlot.geom.geomMap
+import org.jetbrains.letsPlot.geom.geomPoint
 import org.jetbrains.letsPlot.intern.Plot
 import org.jetbrains.letsPlot.label.labs
 import org.jetbrains.letsPlot.letsPlot
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.time.LocalDateTime
 import java.util.*
 import kotlin.io.path.exists
 
@@ -36,9 +38,6 @@ import kotlin.io.path.exists
  *
  */
 class BasureroController {
-    private val dir: String = System.getProperty("user.dir")
-
-<<<<<<<
 
 
     /**
@@ -46,13 +45,7 @@ class BasureroController {
      *
      * @param pathOrigen Lugar de los ficheros a parsear
      * @param pathFinal Lugar donde se parsearan los ficheros
-=======
-    //TODO Controlar que el archivo csv es cualquier nombre pero el contenido es igual que en Ficheros.kt
-    /*
-     * Metodo que se encarga de ejecutar la primera consulta del ejercicio que se trata de PARSER
-     * en la cual tenemos que coger la informacion de los contenedores y de la recodiga
->>>>>>>
-     */
+*/
     fun programaParser(pathOrigen: String, pathFinal: String) {
         if (esCSVResiduos(pathOrigen + File.separator + "modelo_residuos_2021.csv") && esCSVContenedores(pathOrigen + File.separator + "contenedores_varios.csv")) {
             val listaResiduos = ResiduosMapper.csvReaderToResiduo( pathOrigen + File.separator + "modelo_residuos_2021.csv" )
@@ -103,6 +96,7 @@ class BasureroController {
             cantidadRecogidaByTipoByDistrito(listaResiduos)
             //Gráfico con el total de contenedores por distrito.
             graficoTotalContenedoresDistrito(listaContenedores, pathFinal)
+            resumenTemplate(listaContenedores, listaResiduos, pathFinal)
             val tiempoFinal = System.currentTimeMillis()
             println("El tiempo de ejecución es de: ${(tiempoFinal - tiempoInicial)} milisegundos ")
         }else{
@@ -135,7 +129,7 @@ class BasureroController {
             Files.createDirectory(Paths.get(pathFinal + File.separator + "images" + File.separator))
         }
 
-        ggsave(fig, path = path + File.separator, filename = "contenedores_distritos.png")
+        ggsave(fig, path = path + File.separator, filename = "total_contenedores_distrito.png")
     }
 
     private fun graficoMediaToneladasDistrito(listaResiduos: DataFrame<Residuos>, pathDestino: String) {
@@ -231,19 +225,20 @@ class BasureroController {
             estadisticaByMesByResiduo(listaResiduos, distrito2)
             // Gráfica del máximo, mínimo y media por meses en dicho distrito.
             graficoMaxMinMediaPorMeses(listaResiduos, distrito2, pathFinal)
-
-
+            distritoResumentemplate(listaContenedores, listaResiduos, pathFinal, distrito2)
+            val tiempoFinal = System.currentTimeMillis()
+            println("El tiempo de ejecución es de: ${(tiempoFinal - tiempoInicial)} milisegundos ")
         }else{
             println("El distrito no existe")
         }
     }
 
     private fun parserFicherosContenedores(pathOrigen: String): DataFrame<Contenedores> {
-        return if(pathOrigen.endsWith(".csv")){
+        return if(File(pathOrigen + File.separator + "contenedor.csv").exists()){
             ContenedoresMapper.csvReaderToContenedores(pathOrigen + File.separator + "contenedores_varios.csv").toDataFrame()
-        }else if(pathOrigen.endsWith(".json")){
+        }else if(File(pathOrigen + File.separator + "contenedor.json").exists()){
             ContenedoresMapper.jsonToContenedor(pathOrigen + File.separator + "contenedor.json").map { mapToContenedor(it.toString())}.toDataFrame()
-        }else if(pathOrigen.endsWith(".xml")){
+        }else if(File(pathOrigen + File.separator + "contenedor.xml").exists()){
             ContenedoresMapper.xmlToContenedorDTO(pathOrigen + File.separator + "contenedor.xml").map { mapToContenedor(it.toString()) }.toDataFrame()
         }else{
             throw Exception("Archivo no válido")
@@ -253,11 +248,11 @@ class BasureroController {
 
 
     private fun parserFicherosResiduos(pathOrigen: String): DataFrame<Residuos> {
-        return if(pathOrigen.endsWith(".csv")){
+        return if(File(pathOrigen + File.separator + "residuos.csv").exists()){
             ResiduosMapper.csvReaderToResiduo(pathOrigen + File.separator + "modelo_residuos_2021.csv").toDataFrame()
-        }else if(pathOrigen.endsWith(".json")){
+        }else if(File(pathOrigen + File.separator + "residuos.json").exists()){
             ResiduosMapper.jsonToResiduoDTO(pathOrigen + File.separator + "residuos.json").map { mapToResiduo(it.toString()) }.toDataFrame()
-        }else if(pathOrigen.endsWith(".xml")){
+        }else if(File(pathOrigen + File.separator + "residuos.xml").exists()){
             ResiduosMapper.xmlToResiduoDTO(pathOrigen + File.separator + "residuos.json").map { mapToResiduo(it.toString()) }.toDataFrame()
         }else{
             throw Exception("Archivo no válido")
@@ -275,7 +270,7 @@ class BasureroController {
                 mean("toneladas") into "Media"
             }.toMap()
 
-        val fig: Plot = letsPlot(data = res)  + geomBar(
+        val fig: Plot = letsPlot(data = res)  + geomPoint(
             stat = identity,
             alpha = 0.6,
             fill = Color.DARK_BLUE,
@@ -283,7 +278,7 @@ class BasureroController {
         ) {
             x = "month"
             y = "Mínimo"
-        }+ geomBar(
+        } + geomPoint(
             stat = identity,
             alpha = 0.6,
             fill = Color.YELLOW,
@@ -291,7 +286,7 @@ class BasureroController {
         ) {
             x = "month"
             y = "Media"
-        } + geomBar(
+        } + geomPoint(
             stat = identity,
             alpha = 0.6,
             fill = Color.RED,
@@ -308,7 +303,7 @@ class BasureroController {
         if (!Paths.get(path).exists()) {
             Files.createDirectory(Paths.get(pathFinal + File.separator + "images" + File.separator))
         }
-        ggsave(fig, path = path + File.separator, filename = "media_min_max_mensual_$distrito2.png")
+        ggsave(fig, path = path + File.separator, filename = "estadisticas_mensual_$distrito2.png")
     }
 
     private fun graficoTotalToneladasResiduoDistrito(listaResiduos: DataFrame<Residuos>, distrito2: String, pathFinal: String) {
@@ -320,10 +315,10 @@ class BasureroController {
             }
             .toMap()
 
-        val fig: Plot = letsPlot(data = res) + geomMap(
+        val fig: Plot = letsPlot(data = res) + geomBar(
             stat = identity,
             alpha = 0.8,
-            fill = Color.BLACK,
+            fill = Color.RED,
             color = Color.BLACK,
         ) {
             x = "residuos"
@@ -340,16 +335,16 @@ class BasureroController {
         }
         ggsave(fig, path = path + File.separator, filename = "toneladas_tipo_$distrito2.png")
     }
-    private fun estadisticaByMesByResiduo(listaResiduos: DataFrame<Residuos>, distrito2: String) {
-        listaResiduos
-            .filter { it["nombre_distrito"] == distrito2 }
-            .groupBy("month", "nombre_distrito", "residuos")
-            .aggregate {
-                max("toneladas") into "Máximo_Toneladas"
-                min("toneladas") into "Mínimo_Toneladas"
-                mean("toneladas") into "Media_Toneladas"
-                std("toneladas").toString().replace("NaN", "0") into "Desviación_Toneladas"
-            }.html()
+    private fun estadisticaByMesByResiduo(listaResiduos: DataFrame<Residuos>, distrito2: String): String {
+        return listaResiduos
+                .filter { it["nombre_distrito"] == distrito2 }
+                .groupBy("month", "nombre_distrito", "residuos")
+                .aggregate {
+                    max("toneladas") into "Máximo_Toneladas"
+                    min("toneladas") into "Mínimo_Toneladas"
+                    mean("toneladas") into "Media_Toneladas"
+                    std("toneladas").toString().replace("NaN", "0") into "Desviación_Toneladas"
+                }.html()
     }
 
     private fun totalToneladasByResiduoDistrito(listaResiduos: DataFrame<Residuos>, distrito2: String): String {
@@ -406,15 +401,15 @@ class BasureroController {
     }
 
 
-    }
-/*
+
+
     /**
      * Metodo que se encarga de hacer el template html de Resumen
      *
      * @return un html con el resumen
      */
-    fun resumenTemplate(): String {
-        return """ <!doctype html>
+    fun resumenTemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String ) {
+        val html = """ <!doctype html>
         <html lang="en">
         <head>
              <meta charset="utf-8">
@@ -427,8 +422,8 @@ class BasureroController {
     <body>
         <h1>Resumen de recogidas de basura y reciclaje de Madrid </h1></n>
         <hr/><hr/>
-        <p>Este resumen se ha generado a las $time<br/>
-           Autores:Alejandro López Abad y Ruben </p>
+        <p>Este resumen se ha generado a las ${LocalDateTime.now()}<br/>
+           Autores:Alejandro López Abad y Rubén García-Redondo Marín </p>
         <h3>Este es el resumen de Contenedores y Residuos</h3>  <!--hay que hacer contenedores-->
 
         <h4>Consultas</h4>
@@ -459,36 +454,34 @@ class BasureroController {
 
             <tr>
                <td><h5>1</h5></td><!--1-->
-               <td>$numcontenedoresTipoByDistrito</td><!--2-->
-               <td>$grafica1</td><!--3-->
+               <td>${numContenedoresByTipoByDistrito(listaContenedores)}</td><!--2-->
+               <td>Sin gráfica</td><!--3-->
             </tr>
 
             <tr>
                <td><h5>2</h5></td><!--2-->
-               <td>$mediacontenedoresPorTipo</td><!--2-->
-               <td>$grafica2</td><!--3-->
+               <td>${mediaContenedoresByTipoByDistrito(listaContenedores)}</td><!--2-->
+               <td>Sin gráfica</td><!--3-->
             </tr>
             <tr>
                <td><h5>3</h5></td><!--3-->
-               <td>$mediaTonPorTipoByDistrito</td><!--2-->
-               <td>$grafica3</td><!--3-->
+               <td>${mediaToneladasByTipoByDistrito(listaResiduos)}</td><!--2-->
+               <td><img src="./images/media_toneladas_distrito.png"></td><!--3-->
             </tr>
              <tr>
                 <td><h5>4</h5></td><!--4-->
-                <td>
-                    Max $max</br>Min $min</br>Media $medi</br>Desviacion $std
-                </td><!--2-->
-                <td>$grafica4</td><!--3-->
+                <td>${estadisticasByTipoByDistrito(listaResiduos)}</td><!--2-->
+                <td>Sin gráfica</td><!--3-->
              </tr>
              <tr>
                 <td><h5>5</h5></td><!--3-->
-                <td>$sumaTotal </td><!--2-->
-                <td>$grafica5</td><!--3-->
+                <td>${sumaByDistrito(listaResiduos)} </td><!--2-->
+                <td>Sin gráfica</td><!--3-->
             </tr>
             <tr>
                <td><h5>6</h5></td><!--3-->
-               <td>$toneladasResiduosByDIstritoByResiduo</td><!--2-->
-               <td>$grafica6</td><!--3-->
+               <td>${cantidadRecogidaByTipoByDistrito(listaResiduos)}</td><!--2-->
+               <td><img src="./images/total_contenedores_distrito.png"></td><!--3-->
             </tr>
         </table>
 
@@ -496,18 +489,19 @@ class BasureroController {
 
 </html>"""
 
+        File(pathFinal + File.separator + "resumen.html").writeText(html)
     }
-    */
 
-/*
+
+
     /**
      *
      * Metodo que se encarga de hacer el template html de un resumen por distrito
      *
      * @return un html con el resumen por distrito
      */
-    fun distritoResumentemplate(): String {
-        return """  <!doctype html>
+    fun distritoResumentemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String , distrito2: String){
+        val html =  """  <!doctype html>
         <html lang="en">
         <head>
              <meta charset="utf-8">
@@ -520,9 +514,9 @@ class BasureroController {
     <body>
         <h1>Resumen de recogidas de basura y reciclaje de Madrid </h1></n>
         <hr/><hr/>
-        <p>Este resumen se ha generado a las $time<br/>
-           Autores:Alejandro López Abad y Ruben </p>
-        <h3>Este es el resumen de $Distrito</h3>
+        <p>Este resumen se ha generado a las ${LocalDateTime.now()}<br/>
+           Autores:Alejandro López Abad y Rubén García-Redondo Marín </p>
+        <h3>Este es el resumen de $distrito2</h3>
 
         <h4>Consultas</h4>
         <p>Se van a resolver las siguientes consultas: </p>
@@ -545,21 +539,20 @@ class BasureroController {
 
             <tr>
                 <td><h5>1</h5></td>
-                <td>>$numContenedoresByTipoByDistrito</td>
-                <td>$grafica1</td>
+                <td>>${numContenedoresByTipoDistrito(listaContenedores, distrito2.uppercase(Locale.getDefault()))}</td>
+                <td>Sin gráfica</td>
             </tr>
             <tr>
                 <td><h5>2</h5></td><!--2-->
-                <td>$numtotaltoneladasByDistritoByresiduo</td><!--2-->
-                <td>$grafica2</td><!--3-->
+                <td>${totalToneladasByResiduoDistrito(listaResiduos, distrito2)}</td><!--2-->
+                <td><img src="./images/toneladas_tipo_$distrito2.png"></td><!--3-->
             </tr>
             <tr>
                 <td><h5>3</h5></td><!--3-->
-                <td>  Max $max</br>Min $min</br>Media $medi</br>Desviacion $std
-
-                    <p>por mes por residuos en dicho distrito</p>
+                <td> 
+                   ${estadisticaByMesByResiduo(listaResiduos, distrito2)}
                 </td>     
-                <td>$grafica3</td><!--3-->
+                <td><img src="./images/estadisticas_mensual_$distrito2.png"></td><!--3-->
             </tr>
           
            
@@ -569,7 +562,8 @@ class BasureroController {
 
 </html>"""
 
+        File(pathFinal + File.separator + "resumen_$distrito2.html").writeText(html)
     }
-*/
+
 
 }
