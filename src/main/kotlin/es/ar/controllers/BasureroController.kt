@@ -38,6 +38,7 @@ import kotlin.io.path.exists
 class BasureroController {
     private val dir: String = System.getProperty("user.dir")
 
+<<<<<<<
 
 
     /**
@@ -45,6 +46,12 @@ class BasureroController {
      *
      * @param pathOrigen Lugar de los ficheros a parsear
      * @param pathFinal Lugar donde se parsearan los ficheros
+=======
+    //TODO Controlar que el archivo csv es cualquier nombre pero el contenido es igual que en Ficheros.kt
+    /*
+     * Metodo que se encarga de ejecutar la primera consulta del ejercicio que se trata de PARSER
+     * en la cual tenemos que coger la informacion de los contenedores y de la recodiga
+>>>>>>>
      */
     fun programaParser(pathOrigen: String, pathFinal: String) {
         if (esCSVResiduos(pathOrigen + File.separator + "modelo_residuos_2021.csv") && esCSVContenedores(pathOrigen + File.separator + "contenedores_varios.csv")) {
@@ -65,10 +72,13 @@ class BasureroController {
     }
 
     /**
-     * Función que realiza todas las consultas pedidas
+     *  Metodo que se encarga de ejecutar la primera parte de la segunda consulta del ejercicio que se trata de RESUMEN
+     * en la cual tenemos que coger la informacion de los contenedores y de la recodiga, independientemente de la extensión que tenga
+     * y la procesamos generando.
+     * Este metodo hara todas las consultas que necesitamos para mas tarde generar las graficas y el resumen.html
      *
-     * @param pathOrigen path de los archivos
-     * @param pathFinal path donde se guardaran los resultados
+     * @param pathOrigen Es el directorio origen
+     * @param pathFinal Es el directorio donde se guarda los datos conseguidos con el metodo
      */
     fun programaResumen(pathOrigen: String, pathFinal: String) {
         val pathResiduos =  pathOrigen + File.separator + "modelo_residuos_2021.csv"
@@ -205,7 +215,6 @@ class BasureroController {
      * @param pathFinal path donde se generará el informe
      * @param distrito nombre del distrito a realizar las consultas
      */
-    //TODO CAMBIAR FICHEOR A LOS 3 POSIBLES
     fun programaResumenDistrito(pathOrigen: String, pathFinal: String, distrito: String) {
         val tiempoInicial = System.currentTimeMillis()
         val listaResiduos = parserFicherosResiduos(pathOrigen)
@@ -397,5 +406,170 @@ class BasureroController {
     }
 
 
+    }
+/*
+    /**
+     * Metodo que se encarga de hacer el template html de Resumen
+     *
+     * @return un html con el resumen
+     */
+    fun resumenTemplate(): String {
+        return """ <!doctype html>
+        <html lang="en">
+        <head>
+             <meta charset="utf-8">
+             <title>Resumen de recogidas de basura y reciclaje de Madrid</title>
+             <meta name="viewport" content="width=device-width, initial-scale=1">
+             <style type="text/css" href="/css/main.css">
+             </style>
+        </head>
+
+    <body>
+        <h1>Resumen de recogidas de basura y reciclaje de Madrid </h1></n>
+        <hr/><hr/>
+        <p>Este resumen se ha generado a las $time<br/>
+           Autores:Alejandro López Abad y Ruben </p>
+        <h3>Este es el resumen de Contenedores y Residuos</h3>  <!--hay que hacer contenedores-->
+
+        <h4>Consultas</h4>
+        <p>Se van a resolver las siguientes consultas: </p>
+           <ol>
+             <li>Número de contenedores de cada tipo que hay en cada distrito</li>
+          
+             <li> Media de contenedores de cada tipo que hay en cada distrito</li>
+             <li> Media de toneladas anuales de recogidas por cada tipo de basura agrupadas por
+                 distrito.</li>
+             <li> Máximo, mínimo , media y desviación de toneladas anuales de recogidas por cada tipo
+                 de basura agrupadas por distrito.
+             </li>
+             <li>Suma de todo lo recogido</li>
+             <li> Por cada distrito obtener para cada tipo de residuo la cantidad recogida.</li>
+           </ol>
+
+            <hr/>
+            <hr/>
+
+        <table style="text-align: center;width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+            <tr>
+                <th>Consulta</th> <!--1-->
+                <th>Resultado</th>
+                <th>Grafica</th>
+            </tr>
+
+            <tr>
+               <td><h5>1</h5></td><!--1-->
+               <td>$numcontenedoresTipoByDistrito</td><!--2-->
+               <td>$grafica1</td><!--3-->
+            </tr>
+
+            <tr>
+               <td><h5>2</h5></td><!--2-->
+               <td>$mediacontenedoresPorTipo</td><!--2-->
+               <td>$grafica2</td><!--3-->
+            </tr>
+            <tr>
+               <td><h5>3</h5></td><!--3-->
+               <td>$mediaTonPorTipoByDistrito</td><!--2-->
+               <td>$grafica3</td><!--3-->
+            </tr>
+             <tr>
+                <td><h5>4</h5></td><!--4-->
+                <td>
+                    Max $max</br>Min $min</br>Media $medi</br>Desviacion $std
+                </td><!--2-->
+                <td>$grafica4</td><!--3-->
+             </tr>
+             <tr>
+                <td><h5>5</h5></td><!--3-->
+                <td>$sumaTotal </td><!--2-->
+                <td>$grafica5</td><!--3-->
+            </tr>
+            <tr>
+               <td><h5>6</h5></td><!--3-->
+               <td>$toneladasResiduosByDIstritoByResiduo</td><!--2-->
+               <td>$grafica6</td><!--3-->
+            </tr>
+        </table>
+
+    </body>
+
+</html>"""
+
+    }
+    */
+
+/*
+    /**
+     *
+     * Metodo que se encarga de hacer el template html de un resumen por distrito
+     *
+     * @return un html con el resumen por distrito
+     */
+    fun distritoResumentemplate(): String {
+        return """  <!doctype html>
+        <html lang="en">
+        <head>
+             <meta charset="utf-8">
+             <title>Resumen de recogidas de basura y reciclaje de Madrid</title>
+             <meta name="viewport" content="width=device-width, initial-scale=1">
+             <style type="text/css" href="/css/main.css">
+             </style>
+        </head>
+
+    <body>
+        <h1>Resumen de recogidas de basura y reciclaje de Madrid </h1></n>
+        <hr/><hr/>
+        <p>Este resumen se ha generado a las $time<br/>
+           Autores:Alejandro López Abad y Ruben </p>
+        <h3>Este es el resumen de $Distrito</h3>
+
+        <h4>Consultas</h4>
+        <p>Se van a resolver las siguientes consultas: </p>
+           <ol>
+             <li>Media de contenedores de cada tipo que hay en cada distrito</li>
+             <li> Total de toneladas recogidas en ese distrito por residuo</li>
+             <li> Máximo, mínimo , media y desviación por mes por residuo </li>
+           </ol>
+
+            <hr/>
+            <hr/>
+
+        <table style="text-align: center;width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+            <tr>
+              <th>Consulta</th> 
+              <th>Resultado</th>
+              <th>Grafica</th>
+            </tr>
+
+            <tr>
+                <td><h5>1</h5></td>
+                <td>>$numContenedoresByTipoByDistrito</td>
+                <td>$grafica1</td>
+            </tr>
+            <tr>
+                <td><h5>2</h5></td><!--2-->
+                <td>$numtotaltoneladasByDistritoByresiduo</td><!--2-->
+                <td>$grafica2</td><!--3-->
+            </tr>
+            <tr>
+                <td><h5>3</h5></td><!--3-->
+                <td>  Max $max</br>Min $min</br>Media $medi</br>Desviacion $std
+
+                    <p>por mes por residuos en dicho distrito</p>
+                </td>     
+                <td>$grafica3</td><!--3-->
+            </tr>
+          
+           
+       </table>
+
+    </body>
+
+</html>"""
+
+    }
+*/
 
 }
