@@ -1,8 +1,34 @@
-<Bitácora>
- <opcion_elegida>parser</opcion_elegida>
- <exito>false</exito>
- <tiempo>1666032577538</tiempo>
- <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data/</path>
- <id>5aad0151-46e0-414e-97dc-e3823f1f8c7f</id>
- <instante>2022-10-17T20:49:37.627455</instante>
-</Bitácora>
+<ArrayList>
+ <Bitácora>
+  <opcion_elegida>parser</opcion_elegida>
+  <exito>true</exito>
+  <tiempo>1666111849942</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>f8a82c8b-632e-4d2a-a95f-2960f809423d</id>
+  <instante>2022-10-18T18:50:49.943005</instante>
+ </Bitácora>
+ <Bitácora>
+  <opcion_elegida>parser</opcion_elegida>
+  <exito>false</exito>
+  <tiempo>1666111849943</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>4af05643-88bf-4832-bb7f-6d7a5cce1062</id>
+  <instante>2022-10-18T18:50:49.943115</instante>
+ </Bitácora>
+ <Bitácora>
+  <opcion_elegida>resumen</opcion_elegida>
+  <exito>true</exito>
+  <tiempo>1666111849943</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>f0c777fa-595f-4f80-83f0-cd5c9398f1c9</id>
+  <instante>2022-10-18T18:50:49.943240</instante>
+ </Bitácora>
+ <Bitácora>
+  <opcion_elegida>ResumenDistrito</opcion_elegida>
+  <exito>true</exito>
+  <tiempo>1666111997545</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>32f586d6-1b6b-4c01-9cc5-6349780c1f07</id>
+  <instante>2022-10-18T18:53:17.545508</instante>
+ </Bitácora>
+</ArrayList>

@@ -9,20 +9,19 @@ import java.io.File
 import java.util.*
 
 fun main (args: Array<String>){
-    val controller: BasureroController = BasureroController()
-    val pathResiduos2: String = System.getProperty("user.dir")+ File.separator+"data"+File.separator
+    val controller = BasureroController()
     var exito = true;
     try {
         when(controller.comprobarPrograma(args)) {
             "Parsear" -> controller.programaParser(args[1], args[2])
             "Resumen" -> controller.programaResumen(args[1], args[2])
-            "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[4])
+            "ResumenDistrito" -> controller.programaResumenDistrito(args[2], args[3], args[1])
         }
     }catch (e:Exception) {
-        e.printStackTrace()
+        println(e.printStackTrace())
         exito = false
     }finally {
-        Bitacora("parser", exito, System.currentTimeMillis(), pathResiduos2)
+        Bitacora(controller.comprobarPrograma(args), exito, System.currentTimeMillis(), args[2]).crearBitacora()
     }
 }
 

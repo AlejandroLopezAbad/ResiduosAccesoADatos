@@ -75,7 +75,7 @@ object ResiduosMapper {
      * @param linea cadena a transformar
      * @return El objeto de tipo residuo
      */
-    private fun mapToResiduo(linea:String):Residuos{
+    fun mapToResiduo(linea:String):Residuos{
         val campo=linea.split(";")
         return Residuos(
             year = campo[0].toShort(),
