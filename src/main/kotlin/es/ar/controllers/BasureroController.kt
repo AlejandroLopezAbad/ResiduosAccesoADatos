@@ -408,7 +408,7 @@ class BasureroController {
      *
      * @return un html con el resumen
      */
-    fun resumenTemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String ) {
+    private fun resumenTemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String ) {
         val html = """ <!doctype html>
         <html lang="en">
         <head>
@@ -489,7 +489,82 @@ class BasureroController {
 
 </html>"""
 
+        val css = """html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+textarea {
+  resize: vertical;
+}
+ p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    text-align: center;
+    page-break-after: avoid;
+  }
+  * {
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  html {
+    color: #888;
+    display: table;
+    font-family: sans-serif;
+    height: 100%;
+    padding-left: 10px;
+    width: 100%;
+  }
+
+  h1 {
+    color: #555;
+    font-size: 2em;
+    font-weight: 400;
+    text-align: center;
+    position: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+  table{
+
+    align-content: center;
+    align-items: center;
+    align-self: center;
+
+
+  }
+  body{
+
+
+  }
+
+  h5{
+    text-align: center
+  }
+  tr{
+    padding-right: 100px;
+  }"""
+
         File(pathFinal + File.separator + "resumen.html").writeText(html)
+        File(pathFinal + File.separator + "css" + File.separator + "main.css").writeText(css)
     }
 
 
@@ -500,7 +575,7 @@ class BasureroController {
      *
      * @return un html con el resumen por distrito
      */
-    fun distritoResumentemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String , distrito2: String){
+    private fun distritoResumentemplate(listaContenedores: DataFrame<Contenedores>, listaResiduos: DataFrame<Residuos>, pathFinal: String , distrito2: String){
         val html =  """  <!doctype html>
         <html lang="en">
         <head>
@@ -562,7 +637,83 @@ class BasureroController {
 
 </html>"""
 
+        val css = """html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+textarea {
+  resize: vertical;
+}
+ p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    text-align: center;
+    page-break-after: avoid;
+  }
+  * {
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  html {
+    color: #888;
+    display: table;
+    font-family: sans-serif;
+    height: 100%;
+    padding-left: 10px;
+    width: 100%;
+  }
+
+  h1 {
+    color: #555;
+    font-size: 2em;
+    font-weight: 400;
+    text-align: center;
+    position: center;
+  }
+
+  h3 {
+    text-align: center;
+  }
+  table{
+
+    align-content: center;
+    align-items: center;
+    align-self: center;
+
+
+  }
+  body{
+
+
+  }
+
+  h5{
+    text-align: center
+  }
+  tr{
+    padding-right: 100px;
+  }"""
+
         File(pathFinal + File.separator + "resumen_$distrito2.html").writeText(html)
+        Files.createDirectory(Paths.get(pathFinal + File.separator + "css"))
+        File(pathFinal + File.separator + "css" + File.separator + "main.css").writeText(css)
     }
 
 

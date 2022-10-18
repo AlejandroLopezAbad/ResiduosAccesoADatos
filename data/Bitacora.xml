@@ -79,4 +79,28 @@
   <id>e8b890b1-cad8-4a32-9664-6f3a042c912a</id>
   <instante>2022-10-18T20:04:16.267764</instante>
  </Bitácora>
+ <Bitácora>
+  <opcion_elegida>Resumen</opcion_elegida>
+  <exito>false</exito>
+  <tiempo>1666118419899</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>87ceb917-2a71-4cca-bfbe-e39f4356dd13</id>
+  <instante>2022-10-18T20:40:19.900100</instante>
+ </Bitácora>
+ <Bitácora>
+  <opcion_elegida>Resumen</opcion_elegida>
+  <exito>false</exito>
+  <tiempo>1666118832156</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>3fde59b3-7f73-49cb-bc90-d458d9f41709</id>
+  <instante>2022-10-18T20:47:12.156799</instante>
+ </Bitácora>
+ <Bitácora>
+  <opcion_elegida>Resumen</opcion_elegida>
+  <exito>true</exito>
+  <tiempo>1666119022116</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>b110d9d1-71c6-4551-b6c4-7afd4b13fdeb</id>
+  <instante>2022-10-18T20:50:22.116979</instante>
+ </Bitácora>
 </ArrayList>
