@@ -65,7 +65,7 @@ object ContenedoresMapper {
      * @param linea cadena a transformar
      * @return un objeto de TIPO contenedor
      */
-    private fun mapToContenedor(linea:String):Contenedores{
+     fun mapToContenedor(linea:String):Contenedores{
         val campo=linea.split(";")
         return Contenedores(
             codigo_Interno = campo[0],
@@ -121,9 +121,8 @@ object ContenedoresMapper {
      * @param path el directorio donde se encuntra el archivo que vamos a leer
      * @return una lista de ContenedoresDTO
      */
-    fun jsonToContenedorDTO(path:String):List<ContenedoresDTO>{
+    fun jsonToContenedor(path:String):List<ContenedoresDTO>{
         var file = File(path)
-
         if (file.exists() && file.endsWith(".json")){
             val pretty= Json {prettyPrint= true }
             return Json.decodeFromString(File(path).readText())

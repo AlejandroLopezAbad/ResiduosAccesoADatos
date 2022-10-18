@@ -3,6 +3,7 @@ package es.ar.models
 import es.ar.dto.ResiduosDTO
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -28,16 +29,34 @@ class Bitacora (
     @XmlElement(true)
     val instante: String = LocalDateTime.now().toString()
 
-    init {
-        crearBitacora()
+
+
+    private fun leerBitacora(path:String): List<Bitacora> {
+            val xmlBitacora = XML {indentString = "  "}
+            val fichero = File(path + File.separator + "Bitacora.xml")
+            return xmlBitacora.decodeFromString(fichero.readText())
     }
-    private fun crearBitacora() {
-        val xml = XML{
-            indentString = " "
+
+    fun crearBitacora() {
+        if(File(path + File.separator + "Bitacora.xml").exists()){
+            val lista = leerBitacora(path).toMutableList()
+            lista += Bitacora(opcion_elegida, exito, System.currentTimeMillis(), path)
+
+            val xml = XML{
+                indentString = " "
+            }
+            val fichero = File(path + File.separator + "Bitacora.xml")
+            fichero.writeText(xml.encodeToString(lista))
+        }else {
+            val xml = XML {
+                indentString = " "
+            }
+            val listaBitacora = listOf(Bitacora("parser", true, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"),
+                Bitacora("parser", false, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"),
+                Bitacora("resumen", true, System.currentTimeMillis(), "/Users/ruymi/Desktop/ResiduosAccesoADatos/data"))
+            val fichero = File(path + File.separator + "Bitacora.xml")
+            fichero.writeText(xml.encodeToString(listaBitacora))
         }
-        val fichero = File(path + File.separator + "Bitacora.xml")
-        fichero.appendText("\n")
-        fichero.appendText(xml.encodeToString(this))
     }
 }
 
