@@ -83,7 +83,7 @@ object ContenedoresMapper {
      * @param lista la lista de contenedoresDTO que se transformara en el nuevo csv
      */
     fun contenedorToCSV(path:String, lista:List<ContenedoresDTO>){
-        val file = File(path + "contenedor.csv")
+        val file = File(path + File.separator + "contenedor.csv")
         file.writeText("CodigoInterno;Lote;Tipo_Contendor;Distrito;Cantidad")
         lista.forEach {
             file.appendText("\n${it.codigo_Interno};${it.lote};${it.type_Contenedor};${it.distrito};${it.cantidad};")
@@ -97,7 +97,7 @@ object ContenedoresMapper {
      * @param contenedorDto  la lista de contenedoresDTO que se transformara en un archivo JSON
      */
     fun contenedorToJson(path:String, contenedorDto: List<ContenedoresDTO>) {
-        val file = File(path + "contenedor.json")
+        val file = File(path + File.separator + "contenedor.json")
         val json = Json { prettyPrint = true }
         file.writeText(json.encodeToString(contenedorDto))
     }
@@ -110,7 +110,7 @@ object ContenedoresMapper {
      */
     fun contenedorToXML(path:String, contenedoresDto: List<ContenedoresDTO>) {
         val xml = XML { indentString = "  " }
-        val fichero = File(path + "contenedor.xml")
+        val fichero = File(path + File.separator + "contenedor.xml")
         fichero.writeText(xml.encodeToString(contenedoresDto))
 
     }
@@ -122,13 +122,9 @@ object ContenedoresMapper {
      * @return una lista de ContenedoresDTO
      */
     fun jsonToContenedor(path:String):List<ContenedoresDTO>{
-        var file = File(path)
-        if (file.exists() && file.endsWith(".json")){
-            val pretty= Json {prettyPrint= true }
-            return Json.decodeFromString(File(path).readText())
-
-        }
-        throw FilerException("No ha sido posible leer el archivo Json")
+        val file = File(path)
+        val pretty= Json {prettyPrint= true }
+        return Json.decodeFromString(File(path).readText())
     }
 
     /**

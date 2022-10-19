@@ -95,7 +95,7 @@ object ResiduosMapper {
      * @param lista  la lista de residuosDTO que se transformara en el nuevo csv
      */
     fun residuoToCSV(path:String, lista:List<ResiduosDTO>){
-        val file = File(path + "residuos.csv")
+        val file = File(path + File.separator + "residuos.csv")
         file.writeText("year;month;residuo;lote;nombreDistrito;toneladas")
         lista.forEach {
             file.appendText("\n${it.year};${it.month};${it.residuos};${it.lote};${it.nombre_distrito};${it.toneladas}")
@@ -109,7 +109,7 @@ object ResiduosMapper {
      * @param residuosDto  la lista de residuosDTO que se transformara en un archivo JSON
      */
     fun residuoToJson(path:String, residuosDto: List<ResiduosDTO>) {
-        val file = File(path + "residuos.json")
+        val file = File(path + File.separator + "residuos.json")
         val json = Json { prettyPrint = true }
         file.writeText(json.encodeToString(residuosDto))
     }
@@ -122,7 +122,7 @@ object ResiduosMapper {
      */
     fun residuoToXML(path:String, residuosDto: List<ResiduosDTO>) {
         val xml = XML { indentString = "  " }
-        val fichero = File(path + "residuos.xml")
+        val fichero = File(path + File.separator + "residuos.xml")
         fichero.writeText(xml.encodeToString(residuosDto))
     }
 
@@ -136,9 +136,9 @@ object ResiduosMapper {
         var file = File(path)
 
         if (file.exists() && file.endsWith(".json")){
+        }else{
             val pretty= Json {prettyPrint= true }
-            return Json.decodeFromString(File(path).readText())
-
+            return Json.decodeFromString<List<ResiduosDTO>>(File(path).readText())
         }
         throw FilerException("No ha sido posible leer el archivo Json")
     }
