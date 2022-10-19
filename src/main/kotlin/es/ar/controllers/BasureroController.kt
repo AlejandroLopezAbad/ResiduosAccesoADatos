@@ -2,8 +2,10 @@ package es.ar.controllers
 
 import es.ar.mappers.ContenedoresMapper
 import es.ar.mappers.ContenedoresMapper.contenedoresToContenedoresDTO
+import es.ar.mappers.ContenedoresMapper.dtoToContenedores
 import es.ar.mappers.ContenedoresMapper.mapToContenedor
 import es.ar.mappers.ResiduosMapper
+import es.ar.mappers.ResiduosMapper.dtoToResiduos
 import es.ar.mappers.ResiduosMapper.mapToResiduo
 import es.ar.mappers.ResiduosMapper.residuosToResiduosDTO
 import es.ar.models.Contenedores
@@ -16,11 +18,9 @@ import jetbrains.datalore.base.values.Color
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.kotlinx.dataframe.io.html
-import org.jetbrains.letsPlot.Geom
 import org.jetbrains.letsPlot.Stat.identity
 import org.jetbrains.letsPlot.export.ggsave
 import org.jetbrains.letsPlot.geom.geomBar
-import org.jetbrains.letsPlot.geom.geomMap
 import org.jetbrains.letsPlot.geom.geomPoint
 import org.jetbrains.letsPlot.intern.Plot
 import org.jetbrains.letsPlot.label.labs
@@ -47,7 +47,7 @@ class BasureroController {
      * @param pathFinal Lugar donde se parsearan los ficheros
 */
     fun programaParser(pathOrigen: String, pathFinal: String) {
-        if (esCSVResiduos(pathOrigen + File.separator + "modelo_residuos_2021.csv") && esCSVContenedores(pathOrigen + File.separator + "contenedores_varios.csv")) {
+        if ( esCSVContenedores(pathOrigen) && esCSVResiduos(pathOrigen)) {
             val listaResiduos = ResiduosMapper.csvReaderToResiduo( pathOrigen + File.separator + "modelo_residuos_2021.csv" )
             val listaResiduosDTO = listaResiduos.map { it.residuosToResiduosDTO() }
             ResiduosMapper.residuoToCSV(pathFinal, listaResiduosDTO)
@@ -64,6 +64,7 @@ class BasureroController {
         }
     }
 
+
     /**
      *  Metodo que se encarga de ejecutar la primera parte de la segunda consulta del ejercicio que se trata de RESUMEN
      * en la cual tenemos que coger la informacion de los contenedores y de la recodiga, independientemente de la extensión que tenga
@@ -78,8 +79,8 @@ class BasureroController {
         val pathContenedores =  pathOrigen + File.separator + "contenedores_varios.csv"
         if(validarExtension(pathResiduos) && validarExtension(pathContenedores)){
             val tiempoInicial = System.currentTimeMillis()
-            val listaResiduos = ResiduosMapper.csvReaderToResiduo(pathResiduos).toDataFrame()
-            val listaContenedores = ContenedoresMapper.csvReaderToContenedores(pathContenedores).toDataFrame()
+            val listaResiduos = parserFicherosResiduos(pathOrigen)
+            val listaContenedores = parserFicherosContenedores(pathOrigen)
             // Número de contenedores de cada tipo que hay en cada distrito.
             numContenedoresByTipoByDistrito(listaContenedores)
             // Media de contenedores de cada tipo que hay en cada distrito.
@@ -234,26 +235,25 @@ class BasureroController {
     }
 
     private fun parserFicherosContenedores(pathOrigen: String): DataFrame<Contenedores> {
-        return if(File(pathOrigen + File.separator + "contenedor.csv").exists()){
-            ContenedoresMapper.csvReaderToContenedores(pathOrigen + File.separator + "contenedores_varios.csv").toDataFrame()
+         if(File(pathOrigen + File.separator + "contenedor.csv").exists()){
+             return ContenedoresMapper.csvReaderToContenedores(pathOrigen + File.separator + "contenedores_varios.csv").toDataFrame()
         }else if(File(pathOrigen + File.separator + "contenedor.json").exists()){
-            ContenedoresMapper.jsonToContenedor(pathOrigen + File.separator + "contenedor.json").map { mapToContenedor(it.toString())}.toDataFrame()
+             return  ContenedoresMapper.jsonToContenedor(pathOrigen + File.separator + "contenedor.json").map{it.dtoToContenedores()}.toDataFrame()
         }else if(File(pathOrigen + File.separator + "contenedor.xml").exists()){
-            ContenedoresMapper.xmlToContenedorDTO(pathOrigen + File.separator + "contenedor.xml").map { mapToContenedor(it.toString()) }.toDataFrame()
+            return ContenedoresMapper.xmlToContenedorDTO(pathOrigen + File.separator + "contenedor.xml").map{it.dtoToContenedores()}.toDataFrame()
         }else{
             throw Exception("Archivo no válido")
         }
-
     }
 
 
     private fun parserFicherosResiduos(pathOrigen: String): DataFrame<Residuos> {
-        return if(File(pathOrigen + File.separator + "residuos.csv").exists()){
-            ResiduosMapper.csvReaderToResiduo(pathOrigen + File.separator + "modelo_residuos_2021.csv").toDataFrame()
+         if(File(pathOrigen + File.separator + "residuos.csv").exists()){
+            return ResiduosMapper.csvReaderToResiduo(pathOrigen + File.separator + "modelo_residuos_2021.csv").toDataFrame()
         }else if(File(pathOrigen + File.separator + "residuos.json").exists()){
-            ResiduosMapper.jsonToResiduoDTO(pathOrigen + File.separator + "residuos.json").map { mapToResiduo(it.toString()) }.toDataFrame()
+            return  ResiduosMapper.jsonToResiduoDTO(pathOrigen + File.separator + "residuos.json").map{it.dtoToResiduos()}.toDataFrame()
         }else if(File(pathOrigen + File.separator + "residuos.xml").exists()){
-            ResiduosMapper.xmlToResiduoDTO(pathOrigen + File.separator + "residuos.json").map { mapToResiduo(it.toString()) }.toDataFrame()
+           return ResiduosMapper.xmlToResiduoDTO(pathOrigen + File.separator + "residuos.xml").map{it.dtoToResiduos()}.toDataFrame()
         }else{
             throw Exception("Archivo no válido")
         }

@@ -11,8 +11,10 @@ import java.io.File
 fun esCSVResiduos(path: String): Boolean{
     val cabeceraOriginal = "Año;Mes;Lote;Residuo;Distrito;Nombre Distrito;Toneladas"
     val cabeceraModificada = "Año;Mes;Residuo;Lote;Nombre_Distrito;Toneladas"
-    val linea = File(path + "residuos.csv").readLines().take(1).toString().replace("[", "").replace("]", "")
-    return linea == cabeceraOriginal || linea == cabeceraModificada
+    var linea = File(path + File.separator + "modelo_residuos_2021.csv").readLines().first()
+    val re = Regex("[^A-Za-z0-9;._ñ ]")
+    linea = re.replace(linea, "")
+    return linea.equals(cabeceraOriginal)  || linea.equals(cabeceraModificada)
 }
 
 /**
@@ -24,8 +26,11 @@ fun esCSVResiduos(path: String): Boolean{
 fun esCSVContenedores(path: String): Boolean {
     val cabeceraOriginal = "Código Interno del Situad;Tipo Contenedor;Modelo;Descripcion Modelo;Cantidad;Lote;Distrito;Barrio;Tipo Vía;Nombre;Número;COORDENADA X;COORDENADA Y;LONGITUD;LATITUD;DIRECCION"
     val cabeceraModificada = "CodigoInterno;Lote;Tipo_Contendor;Distrito;Cantidad"
-    val linea = File(path + "residuos.csv").readLines().take(1).toString().replace("[", "").replace("]", "")
-    return linea == cabeceraOriginal || linea == cabeceraModificada
+    var linea = File(path + File.separator + "contenedores_varios.csv").readLines().first().toString()
+    val re = Regex("[^A-Za-z0-9;._ñáéíóú ]")
+    linea = re.replace(linea, "")
+    return linea.equals(cabeceraOriginal)  || linea.equals(cabeceraModificada)
+
 }
 
 /**
