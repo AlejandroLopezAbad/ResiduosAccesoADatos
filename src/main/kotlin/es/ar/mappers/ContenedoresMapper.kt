@@ -13,8 +13,14 @@ import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
 import javax.annotation.processing.FilerException
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
-
+/**
+ * Clase que se encarga del mapeo de los Contenedores
+ * Creacion de CSV, JSON y XML
+ */
 object ContenedoresMapper {
 
     /**

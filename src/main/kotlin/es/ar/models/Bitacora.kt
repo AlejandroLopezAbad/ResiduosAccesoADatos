@@ -11,6 +11,9 @@ import java.io.File
 import java.time.LocalDateTime
 import java.util.*
 
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 @Serializable
 @SerialName("Bitácora")

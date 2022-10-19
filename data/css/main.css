@@ -60,9 +60,18 @@ textarea {
 
 
   }
-  body{
+ body{
+    background: #66f7ff;
 
-
+  }
+  img{
+     
+      width: 720px;
+      height: 480px;
+      
+  }
+  td{
+      align-content: center;
   }
 
   h5{

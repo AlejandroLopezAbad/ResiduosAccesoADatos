@@ -3,7 +3,9 @@ package es.ar.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.serialization.XmlElement
-
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 @Serializable
 @SerialName("Contenedores")
