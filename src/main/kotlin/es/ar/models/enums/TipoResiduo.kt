@@ -1,9 +1,13 @@
 package es.ar.models.enums
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 /**
  * Hemos decidido crear este enum para poder clasificar todos los tipos de residuos que hay,
  * ya que para la posterior filtración de datos no será más facil de esta manera
  */
+
 enum class TipoResiduo(tipo:String) {
     RESTO("RESTO"),
     ENVASES("ENVASES"),

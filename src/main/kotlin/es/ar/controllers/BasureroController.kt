@@ -33,7 +33,8 @@ import java.util.*
 import kotlin.io.path.exists
 
 /**
- * Basurero controller
+ * Basurero Controller
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
  *
  *
  */
@@ -106,6 +107,13 @@ class BasureroController {
 
     }
 
+    /**
+     * Metodo que se encarga de crear una Grafica basada en la consulta que le pasamos
+     * que es eL Total de contenedores por distrito
+     *
+     * @param listaContenedores es un dataframe de contenedores
+     * @param pathFinal donde se guarda la imagen
+     */
     private fun graficoTotalContenedoresDistrito(listaContenedores: DataFrame<Contenedores>, pathFinal: String) {
         val consulta = listaContenedores
             .groupBy("distrito", "type_Contenedor")
@@ -133,6 +141,12 @@ class BasureroController {
         ggsave(fig, path = path + File.separator, filename = "total_contenedores_distrito.png")
     }
 
+    /**
+     * Metodo que se encarga de crear la grafica  de media de toneladas mensuales de recogida de basura por distrito
+     *
+     * @param listaResiduos es un data frame donde se encuentra la lista con todos los datos
+     * @param pathDestino donde se guarda la imagen
+     */
     private fun graficoMediaToneladasDistrito(listaResiduos: DataFrame<Residuos>, pathDestino: String) {
         val consulta = listaResiduos
             .groupBy("nombre_distrito", "month")
@@ -158,6 +172,12 @@ class BasureroController {
         ggsave(fig, path = path + File.separator, filename = "media_toneladas_distrito.png")
     }
 
+    /**
+     *Metodo que resuelve la consulta Cantidad recogida por tipo y por distrito
+     *
+     * @param listaResiduos es un data frame donde se encuentra la lista con todos los datos
+     * @return  devuelve el string filtrado y adapatado a html
+     */
     private fun cantidadRecogidaByTipoByDistrito(listaResiduos: DataFrame<Residuos>): String {
         return listaResiduos
                 .groupBy("nombre_distrito", "residuos")
@@ -166,6 +186,12 @@ class BasureroController {
                 }.sortBy("nombre_distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de suma por distrito
+     *
+     * @param listaResiduos es un data frame donde se encuentra la lista con todos los datos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun sumaByDistrito(listaResiduos: DataFrame<Residuos>): String {
         return listaResiduos
                 .groupBy("nombre_distrito")
@@ -173,6 +199,12 @@ class BasureroController {
                 .sortBy("nombre_distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de estadisticas por tipo y Distrito
+     *
+     * @param listaResiduos es un data frame donde se encuentra la lista con todos los datos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun estadisticasByTipoByDistrito(listaResiduos: DataFrame<Residuos>): String {
         return listaResiduos
                 .groupBy("nombre_distrito", "residuos", "year")
@@ -184,6 +216,12 @@ class BasureroController {
                 }.sortBy("nombre_distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de media de toneladas por tipo y distrito
+     *
+     * @param listaResiduos es un data frame donde se encuentra la lista con todos los datos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun mediaToneladasByTipoByDistrito(listaResiduos: DataFrame<Residuos>): String {
         return listaResiduos
                 .groupBy("nombre_distrito", "residuos", "year")
@@ -191,12 +229,24 @@ class BasureroController {
                 .sortBy("nombre_distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de media de contenedores filtrado por tipo y distrito
+     *
+     * @param listaContenedores es un data frame donde se encuentra la lista con todos los datos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun mediaContenedoresByTipoByDistrito(listaContenedores: DataFrame<Contenedores>): String {
         return listaContenedores
                 .groupBy("distrito", "type_Contenedor")
                 .mean().sortBy("distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de numero de contenedores
+     *
+     * @param listaContenedores  es un data frame donde se encuentra la lista con todos los datos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun numContenedoresByTipoByDistrito(listaContenedores: DataFrame<Contenedores>): String {
         return listaContenedores
                 .groupBy("distrito", "type_Contenedor")
@@ -234,6 +284,12 @@ class BasureroController {
         }
     }
 
+    /**
+     * Metodo que se encarga de filtrar que existan los ficheros  para su procesamiento
+     *
+     * @param pathOrigen el directorio origen
+     * @return  un dataframe de contenedores
+     */
     private fun parserFicherosContenedores(pathOrigen: String): DataFrame<Contenedores> {
          if(File(pathOrigen + File.separator + "contenedor.csv").exists()){
              return ContenedoresMapper.csvReaderToContenedores(pathOrigen + File.separator + "contenedores_varios.csv").toDataFrame()
@@ -246,6 +302,12 @@ class BasureroController {
         }
     }
 
+    /**
+     * Metodo que se encarga de filtrar que existan los ficheros  para su procesamiento
+     *
+     * @param pathOrigen el directorio origen
+     * @return un dataframe de contenedores
+     */
 
     private fun parserFicherosResiduos(pathOrigen: String): DataFrame<Residuos> {
          if(File(pathOrigen + File.separator + "residuos.csv").exists()){
@@ -259,7 +321,13 @@ class BasureroController {
         }
     }
 
-
+    /**
+     * Metodo que se encarga de generar el grafico
+     *
+     * @param listaResiduos es un dataframe de residuos
+     * @param distrito2 el distrito por el que filtraremos
+     * @param pathFinal donde se guardara la grafica
+     */
 
     private fun graficoMaxMinMediaPorMeses(listaResiduos: DataFrame<Residuos>, distrito2: String, pathFinal: String) {
         val res = listaResiduos.filter { it["nombre_distrito"] == distrito2 }
@@ -306,6 +374,13 @@ class BasureroController {
         ggsave(fig, path = path + File.separator, filename = "estadisticas_mensual_$distrito2.png")
     }
 
+    /**
+     * Metodo que se encarga de crear el grafico de Total de Toneldas de Residuo por Distrito
+     *
+     * @param listaResiduos es un dataframe de residuos
+     * @param distrito2 el distrito por el que filtraremos
+     * @param pathFinal donde se guardara la imagen
+     */
     private fun graficoTotalToneladasResiduoDistrito(listaResiduos: DataFrame<Residuos>, distrito2: String, pathFinal: String) {
         val res = listaResiduos
             .filter { it["nombre_distrito"] == distrito2 }
@@ -335,6 +410,14 @@ class BasureroController {
         }
         ggsave(fig, path = path + File.separator, filename = "toneladas_tipo_$distrito2.png")
     }
+
+    /**
+     * Metodo que resuelve la consulta de Estadisticas en un mes por residuo
+     *
+     * @param listaResiduos data frame de residuos
+     * @param distrito2 distrito por el que filtraremos para sacar los resultados
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun estadisticaByMesByResiduo(listaResiduos: DataFrame<Residuos>, distrito2: String): String {
         return listaResiduos
                 .filter { it["nombre_distrito"] == distrito2 }
@@ -347,6 +430,13 @@ class BasureroController {
                 }.html()
     }
 
+    /**
+     * Metodo que resuelve la consulta de Total de Tonelada por Distrito
+     *
+     * @param listaResiduos es un dataframe de residuos
+     * @param distrito2 distrito por el que filtraremos
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun totalToneladasByResiduoDistrito(listaResiduos: DataFrame<Residuos>, distrito2: String): String {
         return listaResiduos
             .filter { it["nombre_distrito"] == distrito2 }
@@ -355,6 +445,13 @@ class BasureroController {
             .sortBy("nombre_distrito").html()
     }
 
+    /**
+     * Metodo que resuelve la consulta Numero de Contenedores por Distrito
+     *
+     * @param listaContenedores es un dataframe de contenedores
+     * @param distrito distrito por el que filtraremos la consulta
+     * @return devuelve el string filtrado y adapatado a html
+     */
     private fun numContenedoresByTipoDistrito(listaContenedores: DataFrame<Contenedores>, distrito: String): String {
         var cambioDistrito = distrito.replace("í", "i").uppercase(Locale.getDefault())
         return listaContenedores
@@ -415,7 +512,7 @@ class BasureroController {
              <meta charset="utf-8">
              <title>Resumen de recogidas de basura y reciclaje de Madrid</title>
              <meta name="viewport" content="width=device-width, initial-scale=1">
-             <link rel="stylesheet" type="text/css" href="./css/main.css" media="screen" />
+            <link rel="stylesheet" type="text/css" href="./css/main.css" media="screen" />
         </head>
 
     <body>
@@ -550,9 +647,18 @@ textarea {
 
 
   }
-  body{
+ body{
+    background: #66f7ff;
 
-
+  }
+  img{
+     
+      width: 720px;
+      height: 480px;
+      
+  }
+  td{
+      align-content: center;
   }
 
   h5{
@@ -640,7 +746,7 @@ textarea {
 </html>"""
 
         val css = """html {
-  color: #222;
+  color: #000000;
   font-size: 1em;
   line-height: 1.4;
 }
@@ -701,9 +807,18 @@ textarea {
 
 
   }
-  body{
+ body{
+    background: #66f7ff;
 
-
+  }
+  img{
+     
+      width: 720px;
+      height: 480px;
+      
+  }
+  td{
+      align-content: center;
   }
 
   h5{

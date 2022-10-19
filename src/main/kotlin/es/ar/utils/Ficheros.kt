@@ -1,6 +1,10 @@
 package es.ar.utils
 
 import java.io.File
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
+
 
 /**
  * Comprueba si el path del archivo de tipo csv es del modelo correspondiente a residuos

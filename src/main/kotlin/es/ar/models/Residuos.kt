@@ -3,6 +3,9 @@ package es.ar.models
 import es.ar.models.enums.Lote
 import es.ar.models.enums.TipoResiduo
 import org.jetbrains.kotlinx.dataframe.annotations.DataSchema
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 @DataSchema
 data class Residuos(

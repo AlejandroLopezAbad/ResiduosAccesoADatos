@@ -1,4 +1,7 @@
 package es.ar.utils
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 /**
  * Convierte una cantidad de tipo String en Float
