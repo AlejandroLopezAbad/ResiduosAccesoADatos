@@ -267,7 +267,7 @@ class BasureroController {
         val distrito2 = distrito[0].uppercaseChar() + distrito.slice(1 until distrito.length).lowercase(Locale.getDefault());
         if(listaResiduos["nombre_distrito"].toList().toString().contains(distrito2)){
             // Número de contenedores de cada tipo que hay en el distrito dado
-            numContenedoresByTipoDistrito(listaContenedores, distrito)
+            numContenedoresByTipoDistrito(listaContenedores, distrito2)
             //Total de toneladas recogidas en ese distrito por residuo.
             totalToneladasByResiduoDistrito(listaResiduos, distrito2)
             // Gráfico con el total de toneladas por residuo en ese distrito.
@@ -453,11 +453,11 @@ class BasureroController {
      * @return devuelve el string filtrado y adapatado a html
      */
     private fun numContenedoresByTipoDistrito(listaContenedores: DataFrame<Contenedores>, distrito: String): String {
+        var cambioDistrito = distrito.replace("í", "i").uppercase(Locale.getDefault())
         return listaContenedores
-            .filter { it["distrito"] == distrito.uppercase(Locale.getDefault()) }
+            .filter { it["distrito"] == cambioDistrito }
             .groupBy("distrito", "type_Contenedor")
             .count().sortBy("distrito").html()
-
     }
 
     /**
@@ -669,6 +669,9 @@ textarea {
   }"""
 
         File(pathFinal + File.separator + "resumen.html").writeText(html)
+        if(!(Files.exists(Paths.get(pathFinal + File.separator + "css")))){
+            Files.createDirectory(Paths.get(pathFinal + File.separator + "css"))
+        }
         File(pathFinal + File.separator + "css" + File.separator + "main.css").writeText(css)
     }
 
@@ -718,7 +721,8 @@ textarea {
 
             <tr>
                 <td><h5>1</h5></td>
-                <td>>${numContenedoresByTipoDistrito(listaContenedores, distrito2.uppercase(Locale.getDefault()))}</td>
+                <td>>${numContenedoresByTipoDistrito(listaContenedores, distrito2.replace("í", "i").uppercase(Locale.getDefault())
+        )}</td>
                 <td>Sin gráfica</td>
             </tr>
             <tr>
@@ -825,7 +829,9 @@ textarea {
   }"""
 
         File(pathFinal + File.separator + "resumen_$distrito2.html").writeText(html)
-        Files.createDirectory(Paths.get(pathFinal + File.separator + "css"))
+        if(!(Files.exists(Paths.get(pathFinal + File.separator + "css")))){
+            Files.createDirectory(Paths.get(pathFinal + File.separator + "css"))
+        }
         File(pathFinal + File.separator + "css" + File.separator + "main.css").writeText(css)
     }
 
