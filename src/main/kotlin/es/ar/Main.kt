@@ -7,6 +7,9 @@ import es.ar.utils.validarExtension
 
 import java.io.File
 import java.util.*
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 fun main (args: Array<String>){
     val controller = BasureroController()

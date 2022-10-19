@@ -3,6 +3,9 @@ package es.ar.utils
 import es.ar.models.enums.Lote
 import es.ar.models.enums.TipoContendor
 import es.ar.models.enums.TipoResiduo
+/**
+ * @author Alejandro Lopez Abad y Ruben Garcia-Redondo Marin
+ */
 
 class ParseTipo() {
     /**
