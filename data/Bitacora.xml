@@ -615,4 +615,12 @@
   <id>667d3d95-8155-47a3-a27c-c58241e0e571</id>
   <instante>2022-10-19T20:25:51.732520900</instante>
  </Bitácora>
+ <Bitácora>
+  <opcion_elegida>Parsear</opcion_elegida>
+  <exito>true</exito>
+  <tiempo>1666214332672</tiempo>
+  <path>/Users/ruymi/Desktop/ResiduosAccesoADatos/data</path>
+  <id>7cb3cdbb-1de6-4d88-9ffa-79940034c961</id>
+  <instante>2022-10-19T23:18:52.672340</instante>
+ </Bitácora>
 </ArrayList>
