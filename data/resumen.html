@@ -1,0 +1,2758 @@
+ <!doctype html>
+        <html lang="en">
+        <head>
+             <meta charset="utf-8">
+             <title>Resumen de recogidas de basura y reciclaje de Madrid</title>
+             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" type="text/css" href="./css/main.css" media="screen" />
+        </head>
+
+    <body>
+        <h1>Resumen de recogidas de basura y reciclaje de Madrid </h1></n>
+        <hr/><hr/>
+        <p>Este resumen se ha generado a las 2022-10-19T20:25:50.722170700<br/>
+           Autores:Alejandro López Abad y Rubén García-Redondo Marín </p>
+        <h3>Este es el resumen de Contenedores y Residuos</h3>  <!--hay que hacer contenedores-->
+
+        <h4>Consultas</h4>
+        <p>Se van a resolver las siguientes consultas: </p>
+           <ol>
+             <li>Número de contenedores de cada tipo que hay en cada distrito</li>
+          
+             <li> Media de contenedores de cada tipo que hay en cada distrito</li>
+             <li> Media de toneladas anuales de recogidas por cada tipo de basura agrupadas por
+                 distrito.</li>
+             <li> Máximo, mínimo , media y desviación de toneladas anuales de recogidas por cada tipo
+                 de basura agrupadas por distrito.
+             </li>
+             <li>Suma de todo lo recogido</li>
+             <li> Por cada distrito obtener para cada tipo de residuo la cantidad recogida.</li>
+           </ol>
+
+            <hr/>
+            <hr/>
+
+        <table style="text-align: center;width: 100%;" border="1" cellpadding="2" cellspacing="2">
+
+            <tr>
+                <th>Consulta</th> <!--1-->
+                <th>Resultado</th>
+                <th>Grafica</th>
+            </tr>
+
+            <tr>
+               <td><h5>1</h5></td><!--1-->
+               <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934278"></table>
+
+<p>... showing only top 20 of 77 rows</p><p>DataFrame [77 x 3]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"distrito: String\">distrito</span>", children: [], rightAlign: false, values: ["ARGANZUELA","ARGANZUELA","ARGANZUELA","BARAJAS","BARAJAS","BARAJAS","BARAJAS","CARABANCHEL","CARABANCHEL","CARABANCHEL","CARABANCHEL","CENTRO","CENTRO","CHAMARTIN","CHAMARTIN","CHAMARTIN","CHAMARTIN","CHAMBERI","CHAMBERI","CIUDAD LINEAL"] }, 
+{ name: "<span title=\"type_Contenedor: es.ar.models.enums.TipoContendor\">type_Contenedor</span>", children: [], rightAlign: false, values: ["ENVASES","VIDRIO","RESTO","ENVASES","ORGANICA","RESTO","VIDRIO","ENVASES","RESTO","VIDRIO","ORGANICA","ENVASES","VIDRIO","ENVASES","ORGANICA","RESTO","VIDRIO","ENVASES","VIDRIO","ENVASES"] }, 
+{ name: "<span title=\"count: Int\">count</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">336</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">332</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">313</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">129</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">196</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">161</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1815</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1863</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">548</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1095</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">329</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">161</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">478</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">91</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">135</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">341</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">272</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">265</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">882</span></span>"] }, 
+], id: 1962934278, rootId: 1962934278, totalRows: 77 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934278) });
+
+
+        </script>
+        </html></td><!--2-->
+               <td>Sin gráfica</td><!--3-->
+            </tr>
+
+            <tr>
+               <td><h5>2</h5></td><!--2-->
+               <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934279"></table>
+
+<p>... showing only top 20 of 77 rows</p><p>DataFrame [77 x 3]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"distrito: String\">distrito</span>", children: [], rightAlign: false, values: ["ARGANZUELA","ARGANZUELA","ARGANZUELA","BARAJAS","BARAJAS","BARAJAS","BARAJAS","CARABANCHEL","CARABANCHEL","CARABANCHEL","CARABANCHEL","CENTRO","CENTRO","CHAMARTIN","CHAMARTIN","CHAMARTIN","CHAMARTIN","CHAMBERI","CHAMBERI","CIUDAD LINEAL"] }, 
+{ name: "<span title=\"type_Contenedor: es.ar.models.enums.TipoContendor\">type_Contenedor</span>", children: [], rightAlign: false, values: ["ENVASES","VIDRIO","RESTO","ENVASES","ORGANICA","RESTO","VIDRIO","ENVASES","RESTO","VIDRIO","ORGANICA","ENVASES","VIDRIO","ENVASES","ORGANICA","RESTO","VIDRIO","ENVASES","VIDRIO","ENVASES"] }, 
+{ name: "<span title=\"cantidad: Double\">cantidad</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,0</span></span>"] }, 
+], id: 1962934279, rootId: 1962934279, totalRows: 77 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934279) });
+
+
+        </script>
+        </html></td><!--2-->
+               <td>Sin gráfica</td><!--3-->
+            </tr>
+            <tr>
+               <td><h5>3</h5></td><!--3-->
+               <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934280"></table>
+
+<p>... showing only top 20 of 148 rows</p><p>DataFrame [148 x 4]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"nombre_distrito: String\">nombre_distrito</span>", children: [], rightAlign: false, values: ["Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel"] }, 
+{ name: "<span title=\"residuos: es.ar.models.enums.TipoResiduo\">residuos</span>", children: [], rightAlign: false, values: ["RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD","PUNTOS_LIMPIOS","RESTO","ENVASES","VIDRIO","ORGANICA","RCD","PUNTOS_LIMPIOS","CARTON_COMERCIAL","RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD"] }, 
+{ name: "<span title=\"year: Short\">year</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>"] }, 
+{ name: "<span title=\"Media_Toneladas: Double\">Media_Toneladas</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">1894,020844</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">313,039806</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">275,680002</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">617,755000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">25,528334</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">53,619092</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">72,271667</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">818,626668</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">102,462500</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">107,181669</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">346,575002</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">24,888750</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">34,290000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">5,610000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">4396,960815</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">510,834587</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">281,058333</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1118,248332</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">28,246667</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">54,161818</span></span>"] }, 
+], id: 1962934280, rootId: 1962934280, totalRows: 148 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934280) });
+
+
+        </script>
+        </html></td><!--2-->
+               <td><img src="./images/media_toneladas_distrito.png"></td><!--3-->
+            </tr>
+             <tr>
+                <td><h5>4</h5></td><!--4-->
+                <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934281"></table>
+
+<p>... showing only top 20 of 148 rows</p><p>DataFrame [148 x 7]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"nombre_distrito: String\">nombre_distrito</span>", children: [], rightAlign: false, values: ["Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel"] }, 
+{ name: "<span title=\"residuos: es.ar.models.enums.TipoResiduo\">residuos</span>", children: [], rightAlign: false, values: ["RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD","PUNTOS_LIMPIOS","RESTO","ENVASES","VIDRIO","ORGANICA","RCD","PUNTOS_LIMPIOS","CARTON_COMERCIAL","RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD"] }, 
+{ name: "<span title=\"year: Short\">year</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2021</span></span>"] }, 
+{ name: "<span title=\"Mínimo_Toneladas: Comparable\">Mínimo_Toneladas</span>", children: [], rightAlign: false, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">1568,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">0,2</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">202,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">402,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">20,3</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">30,6</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">59,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">658,3</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">31,6</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">59,1</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">144,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">8,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">19,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1,2</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">3449,9</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">228,1</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">218,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">724,4</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">23,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">25,0</span></span>"] }, 
+{ name: "<span title=\"Máximo_Toneladas: Comparable\">Máximo_Toneladas</span>", children: [], rightAlign: false, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">2193,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">385,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">352,6</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">693,6</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">34,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">142,4</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">88,0</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">958,9</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">193,8</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">152,2</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">447,9</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">88,4</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">43,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">18,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">5138,9</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">819,2</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">331,5</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1242,7</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">33,6</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">71,4</span></span>"] }, 
+{ name: "<span title=\"Media_Toneladas: Double\">Media_Toneladas</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">1894,020844</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">313,039806</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">275,680002</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">617,755000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">25,528334</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">53,619092</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">72,271667</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">818,626668</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">102,462500</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">107,181669</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">346,575002</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">24,888750</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">34,290000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">5,610000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">4396,960815</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">510,834587</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">281,058333</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1118,248332</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">28,246667</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">54,161818</span></span>"] }, 
+{ name: "<span title=\"Desviación_Toneladas: Double\">Desviación_Toneladas</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">147,384054</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">99,780040</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">45,151989</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">87,791320</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">3,829763</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">33,159174</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">10,631816</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">71,678440</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">54,484873</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">31,119079</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">97,545376</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">23,262916</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">6,313676</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">5,128978</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">386,480146</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">235,494824</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">35,296405</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">145,544228</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2,946163</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">13,525255</span></span>"] }, 
+], id: 1962934281, rootId: 1962934281, totalRows: 148 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934281) });
+
+
+        </script>
+        </html></td><!--2-->
+                <td>Sin gráfica</td><!--3-->
+             </tr>
+             <tr>
+                <td><h5>5</h5></td><!--3-->
+                <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934282"></table>
+
+<p>... showing only top 20 of 22 rows</p><p>DataFrame [22 x 2]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"nombre_distrito: String\">nombre_distrito</span>", children: [], rightAlign: false, values: ["Arganzuela","Barajas","Carabanchel","Centro","Chamart&#237;n","Chamber&#237;","Ciudad Lineal","Fuencarral - El Pardo","Hortaleza","Latina","Moncloa - Aravaca","Moratalaz","Puente de Vallecas","Retiro","Salamanca","San Blas - Canillejas","Sin Distrito","Tetu&#225;n","Usera","Vic&#225;lvaro"] }, 
+{ name: "<span title=\"Toneladas_Totales: Number\">Toneladas_Totales</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">43351,922</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">18499,561</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">83218,828</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">74160,461</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">50307,875</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">47037,707</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">68199,734</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">86267,578</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">60016,137</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">72393,133</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">59491,098</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">28804,938</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">76623,203</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">40118,055</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">53657,559</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">51812,082</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">153,810</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">53028,875</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">42565,445</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">29657,307</span></span>"] }, 
+], id: 1962934282, rootId: 1962934282, totalRows: 22 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934282) });
+
+
+        </script>
+        </html> </td><!--2-->
+                <td>Sin gráfica</td><!--3-->
+            </tr>
+            <tr>
+               <td><h5>6</h5></td><!--3-->
+               <td>        <html>
+        <head>
+            <style type="text/css">
+                :root {
+    --background: #fff;
+    --background-odd: #f5f5f5;
+    --background-hover: #d9edfd;
+    --header-text-color: #474747;
+    --text-color: #848484;
+    --text-color-dark: #000;
+    --text-color-medium: #737373;
+    --text-color-pale: #b3b3b3;
+    --inner-border-color: #aaa;
+    --bold-border-color: #000;
+    --link-color: #296eaa;
+    --link-color-pale: #296eaa;
+    --link-hover: #1a466c;
+}
+
+:root[theme="dark"], :root [data-jp-theme-light="false"]{
+    --background: #303030;
+    --background-odd: #3c3c3c;
+    --background-hover: #464646;
+    --header-text-color: #dddddd;
+    --text-color: #b3b3b3;
+    --text-color-dark: #dddddd;
+    --text-color-medium: #b2b2b2;
+    --text-color-pale: #737373;
+    --inner-border-color: #707070;
+    --bold-border-color: #777777;
+    --link-color: #008dc0;
+    --link-color-pale: #97e1fb;
+    --link-hover: #00688e;
+}
+
+table.dataframe {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    background-color: var(--background);
+    color: var(--text-color-dark);
+    border: none;
+    border-collapse: collapse;
+}
+
+table.dataframe th, td {
+    padding: 6px;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+table.dataframe th {
+    background-color: var(--background);
+    color: var(--header-text-color);
+}
+
+table.dataframe td {
+    vertical-align: top;
+}
+
+table.dataframe th.bottomBorder {
+    border-bottom-color: var(--bold-border-color);
+}
+
+table.dataframe tbody > tr:nth-child(odd) {
+    background: var(--background-odd);
+}
+
+table.dataframe tbody > tr:nth-child(even) {
+    background: var(--background);
+}
+
+table.dataframe tbody > tr:hover {
+    background: var(--background-hover);
+}
+
+table.dataframe a {
+    cursor: pointer;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+table.dataframe tr:hover > td a {
+    color: var(--link-color-pale);
+}
+
+table.dataframe a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+table.dataframe img {
+    max-width: fit-content;
+}
+
+table.dataframe th.complex {
+    background-color: var(--background);
+    border: 1px solid var(--background);
+}
+
+table.dataframe .leftBorder {
+    border-left-color: var(--inner-border-color);
+}
+
+table.dataframe .rightBorder {
+    border-right-color: var(--inner-border-color);
+}
+
+table.dataframe .rightAlign {
+    text-align: right;
+}
+
+table.dataframe .expanderSvg {
+    width: 8px;
+    height: 8px;
+    margin-right: 3px;
+}
+
+table.dataframe .expander {
+    display: flex;
+    align-items: center;
+}
+
+/* formatting */
+
+table.dataframe .null {
+    color: var(--text-color-pale);
+}
+
+table.dataframe .structural {
+    color: var(--text-color-medium);
+    font-weight: bold;
+}
+
+table.dataframe .dataFrameCaption {
+    font-weight: bold;
+}
+
+table.dataframe .numbers {
+    color: var(--text-color-dark);
+}
+
+table.dataframe td:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+table.dataframe tr:hover .formatted .structural, .null {
+    color: var(--text-color-dark);
+}
+
+
+
+
+            </style>
+        </head>
+        <body>
+            
+<table class="dataframe" id="df_1962934283"></table>
+
+<p>... showing only top 20 of 148 rows</p><p>DataFrame [148 x 3]</p>
+        </body>
+        <script>
+            (function () {
+    window.DataFrame = window.DataFrame || new (function () {
+        this.addTable = function (df) {
+            let cols = df.cols;
+            for (let i = 0; i < cols.length; i++) {
+                for (let c of cols[i].children) {
+                    cols[c].parent = i;
+                }
+            }
+            df.nrow = 0
+            for (let i = 0; i < df.cols.length; i++) {
+                if (df.cols[i].values.length > df.nrow) df.nrow = df.cols[i].values.length
+            }
+            if (df.id === df.rootId) {
+                df.expandedFrames = new Set()
+                df.childFrames = {}
+                const table = this.getTableElement(df.id)
+                table.df = df
+                for (let i = 0; i < df.cols.length; i++) {
+                    let col = df.cols[i]
+                    if (col.parent === undefined && col.children.length > 0) col.expanded = true
+                }
+            } else {
+                const rootDf = this.getTableData(df.rootId)
+                rootDf.childFrames[df.id] = df
+            }
+        }
+
+        this.computeRenderData = function (df) {
+            let result = []
+            let pos = 0
+            for (let col = 0; col < df.cols.length; col++) {
+                if (df.cols[col].parent === undefined)
+                    pos += this.computeRenderDataRec(df.cols, col, pos, 0, result, false, false)
+            }
+            for (let i = 0; i < result.length; i++) {
+                let row = result[i]
+                for (let j = 0; j < row.length; j++) {
+                    let cell = row[j]
+                    if (j === 0)
+                        cell.leftBd = false
+                    if (j < row.length - 1) {
+                        let nextData = row[j + 1]
+                        if (nextData.leftBd) cell.rightBd = true
+                        else if (cell.rightBd) nextData.leftBd = true
+                    } else cell.rightBd = false
+                }
+            }
+            return result
+        }
+
+        this.computeRenderDataRec = function (cols, colId, pos, depth, result, leftBorder, rightBorder) {
+            if (result.length === depth) {
+                const array = [];
+                if (pos > 0) {
+                    let j = 0
+                    for (let i = 0; j < pos; i++) {
+                        let c = result[depth - 1][i]
+                        j += c.span
+                        let copy = Object.assign({empty: true}, c)
+                        array.push(copy)
+                    }
+                }
+                result.push(array)
+            }
+            const col = cols[colId];
+            let size = 0;
+            if (col.expanded) {
+                let childPos = pos
+                for (let i = 0; i < col.children.length; i++) {
+                    let child = col.children[i]
+                    let childLeft = i === 0 && (col.children.length > 1 || leftBorder)
+                    let childRight = i === col.children.length - 1 && (col.children.length > 1 || rightBorder)
+                    let childSize = this.computeRenderDataRec(cols, child, childPos, depth + 1, result, childLeft, childRight)
+                    childPos += childSize
+                    size += childSize
+                }
+            } else {
+                for (let i = depth + 1; i < result.length; i++)
+                    result[i].push({id: colId, span: 1, leftBd: leftBorder, rightBd: rightBorder, empty: true})
+                size = 1
+            }
+            let left = leftBorder
+            let right = rightBorder
+            if (size > 1) {
+                left = true
+                right = true
+            }
+            result[depth].push({id: colId, span: size, leftBd: left, rightBd: right})
+            return size
+        }
+
+        this.getTableElement = function (id) {
+            return document.getElementById("df_" + id)
+        }
+
+        this.getTableData = function (id) {
+            return this.getTableElement(id).df
+        }
+
+        this.createExpander = function (isExpanded) {
+            const svgNs = "http://www.w3.org/2000/svg"
+            let svg = document.createElementNS(svgNs, "svg")
+            svg.classList.add("expanderSvg")
+            let path = document.createElementNS(svgNs, "path")
+            if (isExpanded) {
+                svg.setAttribute("viewBox", "0 -2 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 4 4 4 -4 -1 -1 -3 3Z")
+            } else {
+                svg.setAttribute("viewBox", "-2 0 8 8")
+                path.setAttribute("d", "M1 0 l-1 1 3 3 -3 3 1 1 4 -4Z")
+            }
+            path.setAttribute("fill", "currentColor")
+            svg.appendChild(path)
+            return svg
+        }
+
+        this.renderTable = function (id) {
+
+            let table = this.getTableElement(id)
+
+            if (table === null) return
+
+            table.innerHTML = ""
+
+            let df = table.df
+            let rootDf = df.rootId === df.id ? df : this.getTableData(df.rootId)
+
+            // header
+            let header = document.createElement("thead")
+            table.appendChild(header)
+
+            let renderData = this.computeRenderData(df)
+            for (let j = 0; j < renderData.length; j++) {
+                let rowData = renderData[j]
+                let tr = document.createElement("tr");
+                let isLastRow = j === renderData.length - 1
+                header.appendChild(tr);
+                for (let i = 0; i < rowData.length; i++) {
+                    let cell = rowData[i]
+                    let th = document.createElement("th");
+                    th.setAttribute("colspan", cell.span)
+                    let colId = cell.id
+                    let col = df.cols[colId];
+                    if (!cell.empty) {
+                        if (col.children.length === 0) {
+                            th.innerHTML = col.name
+                        } else {
+                            let link = document.createElement("a")
+                            link.className = "expander"
+                            let that = this
+                            link.onclick = function () {
+                                col.expanded = !col.expanded
+                                that.renderTable(id)
+                            }
+                            link.appendChild(this.createExpander(col.expanded))
+                            link.innerHTML += col.name
+                            th.appendChild(link)
+                        }
+                    }
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (isLastRow)
+                        classes += " bottomBorder"
+                    if (classes.length > 0)
+                        th.setAttribute("class", classes)
+                    tr.appendChild(th)
+                }
+            }
+
+            // body
+            let body = document.createElement("tbody")
+            table.appendChild(body)
+
+            let columns = renderData.pop()
+            for (let row = 0; row < df.nrow; row++) {
+                let tr = document.createElement("tr");
+                body.appendChild(tr)
+                for (let i = 0; i < columns.length; i++) {
+                    let cell = columns[i]
+                    let td = document.createElement("td");
+                    let colId = cell.id
+                    let col = df.cols[colId]
+                    let classes = (cell.leftBd ? " leftBorder" : "") + (cell.rightBd ? " rightBorder" : "")
+                    if (col.rightAlign)
+                        classes += " rightAlign"
+                    if (classes.length > 0)
+                        td.setAttribute("class", classes)
+                    tr.appendChild(td)
+                    let value = col.values[row]
+                    if (value.frameId !== undefined) {
+                        let frameId = value.frameId
+                        let expanded = rootDf.expandedFrames.has(frameId)
+                        let link = document.createElement("a")
+                        link.className = "expander"
+                        let that = this
+                        link.onclick = function () {
+                            if (rootDf.expandedFrames.has(frameId))
+                                rootDf.expandedFrames.delete(frameId)
+                            else rootDf.expandedFrames.add(frameId)
+                            that.renderTable(id)
+                        }
+                        link.appendChild(this.createExpander(expanded))
+                        link.innerHTML += value.value
+                        if (expanded) {
+                            td.appendChild(link)
+                            td.appendChild(document.createElement("p"))
+                            const childTable = document.createElement("table")
+                            childTable.className = "dataframe"
+                            childTable.id = "df_" + frameId
+                            let childDf = rootDf.childFrames[frameId]
+                            childTable.df = childDf
+                            td.appendChild(childTable)
+                            this.renderTable(frameId)
+                            if (childDf.nrow !== childDf.totalRows) {
+                                const footer = document.createElement("p")
+                                footer.innerText = `... showing only top ${childDf.nrow} of ${childDf.totalRows} rows`
+                                td.appendChild(footer)
+                            }
+                        } else {
+                            td.appendChild(link)
+                        }
+                    } else if (value.style !== undefined) {
+                        td.innerHTML = value.value
+                        td.setAttribute("style", value.style)
+                    } else td.innerHTML = value
+                    this.nodeScriptReplace(td)
+                }
+            }
+        }
+
+        this.nodeScriptReplace = function (node) {
+            if (this.nodeScriptIs(node) === true) {
+                node.parentNode.replaceChild(this.nodeScriptClone(node), node);
+            } else {
+                let i = -1, children = node.childNodes;
+                while (++i < children.length) {
+                    this.nodeScriptReplace(children[i]);
+                }
+            }
+
+            return node;
+        }
+
+        this.nodeScriptClone = function (node) {
+            let script = document.createElement("script");
+            script.text = node.innerHTML;
+
+            let i = -1, attrs = node.attributes, attr;
+            while (++i < attrs.length) {
+                script.setAttribute((attr = attrs[i]).name, attr.value);
+            }
+            return script;
+        }
+
+        this.nodeScriptIs = function (node) {
+            return node.tagName === 'SCRIPT';
+        }
+    })()
+
+    window.call_DataFrame = function (f) {
+        return f();
+    };
+
+    let funQueue = window["kotlinQueues"] && window["kotlinQueues"]["DataFrame"];
+    if (funQueue) {
+        funQueue.forEach(function (f) {
+            f();
+        });
+        funQueue = [];
+    }
+})()
+
+/*<!--*/
+call_DataFrame(function() { DataFrame.addTable({ cols: [{ name: "<span title=\"nombre_distrito: String\">nombre_distrito</span>", children: [], rightAlign: false, values: ["Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Arganzuela","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Barajas","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel","Carabanchel"] }, 
+{ name: "<span title=\"residuos: es.ar.models.enums.TipoResiduo\">residuos</span>", children: [], rightAlign: false, values: ["RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD","PUNTOS_LIMPIOS","RESTO","ENVASES","VIDRIO","ORGANICA","RCD","PUNTOS_LIMPIOS","CARTON_COMERCIAL","RESTO","ENVASES","VIDRIO","ORGANICA","CARTON_COMERCIAL","RCD"] }, 
+{ name: "<span title=\"Total_Toneladas: Number\">Total_Toneladas</span>", children: [], rightAlign: true, values: ["<span class=\"formatted\" title=\"\"><span class=\"numbers\">22728,250000</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">8139,034668</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">3308,160156</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">7413,060059</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">306,339996</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">589,809998</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">867,260010</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">9823,520508</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">2459,099854</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">1286,180054</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">4158,900391</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">298,665009</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">411,480011</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">61,709999</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">52763,527344</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">12260,029297</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">3372,700195</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">13418,979492</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">338,959991</span></span>","<span class=\"formatted\" title=\"\"><span class=\"numbers\">595,779907</span></span>"] }, 
+], id: 1962934283, rootId: 1962934283, totalRows: 148 } ) });
+/*-->*/
+
+call_DataFrame(function() { DataFrame.renderTable(1962934283) });
+
+
+        </script>
+        </html></td><!--2-->
+               <td><img src="./images/total_contenedores_distrito.png"></td><!--3-->
+            </tr>
+        </table>
+
+    </body>
+
+</html>
